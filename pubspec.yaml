@@ -3,6 +3,8 @@ description: Flutter package for build Flexible UI for diference screens
 version: 0.0.1
 author: DipDev Studio
 homepage: https://dipdev.studio
+issue_tracker: https://gitlab.com/dipdev.studio/open-source/flutter-flexui/issues
+repository: https://gitlab.com/dipdev.studio/open-source/flutter-flexui
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
