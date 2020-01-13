@@ -28,23 +28,45 @@ class ScreenSize {
 
   int getMaxColumns(
     BuildContext context, {
-    int xs = 1,
-    int sm = 1,
-    int md = 1,
-    int lg = 1,
+    int colXS = 1,
+    int colSm = 1,
+    int colMd = 1,
+    int colLg = 1,
   }) {
     switch (screenSize(context)) {
       case Screen.LG:
-        return lg;
+        return colLg;
         break;
       case Screen.MD:
-        return md;
+        return colMd;
         break;
       case Screen.SM:
-        return sm;
+        return colSm;
         break;
       default:
-        return xs;
+        return colXS;
+    }
+  }
+
+  TextStyle geFontStyle(
+    BuildContext context, {
+    TextStyle styleXS,
+    TextStyle styleSm,
+    TextStyle styleMd,
+    TextStyle styleLg,
+  }) {
+    switch (screenSize(context)) {
+      case Screen.LG:
+        return styleLg;
+        break;
+      case Screen.MD:
+        return styleMd;
+        break;
+      case Screen.SM:
+        return styleSm;
+        break;
+      default:
+        return styleXS;
     }
   }
 }

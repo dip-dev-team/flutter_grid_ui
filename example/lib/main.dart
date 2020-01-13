@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_flexui/widgets/flex_row.dart';
+import 'package:flutter_flexui/widgets/flex_text.dart';
 
 void main() => runApp(MyApp());
 
@@ -51,16 +52,26 @@ class _MyHomePageState extends State<MyHomePage> {
           rowVerticalDirection: VerticalDirection.down,
           rowMainAxisSize: MainAxisSize.max,
           children: <Widget>[
-            Text(
+            FlexText(
               'You have pushed the button this many times:',
             ),
-            Text(
+            FlexText(
               '$_counter',
               style: Theme.of(context).textTheme.display1,
             ),
-            Text("3"),
-            Text("4"),
-            Text("5"),
+            FlexText(
+              "3",
+              styleSm: TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
+              styleMd: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+              styleLg: TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
+            ),
+            FlexText("4"),
+            FlexText(
+              "5",
+              styleSm: TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
+              styleMd: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+              styleLg: TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
+            ),
           ],
         ),
       ),

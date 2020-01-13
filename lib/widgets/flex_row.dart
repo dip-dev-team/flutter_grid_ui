@@ -1,7 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'package:flutter_flexui/utils/screen_size.dart';
 
-class FlexRow extends StatefulWidget with ScreenSize {
+class FlexRow extends StatelessWidget with ScreenSize {
   final List<Widget> children;
   final int colXS, colSm, colMd, colLg;
 
@@ -41,29 +41,15 @@ class FlexRow extends StatefulWidget with ScreenSize {
         super(key: key);
 
   @override
-  _FlexRowState createState() => _FlexRowState();
-}
-
-class _FlexRowState extends State<FlexRow> {
-  @override
-  void initState() {
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-      int maxColumns = widget.getMaxColumns(context,
-          xs: widget.colXS,
-          sm: widget.colSm,
-          md: widget.colMd,
-          lg: widget.colLg);
+      int maxColumns = this.getMaxColumns(context,
+          colXS: colXS, colSm: colSm, colMd: colMd, colLg: colLg);
       //Size widgetSize = Size(constraints.maxWidth, constraints.maxHeight);
       List<Widget> columns = [];
-      print("maxColumns: " + maxColumns.toString());
       List<Widget> rows = [];
-      for (Widget child in widget.children) {
+      for (Widget child in this.children) {
         if (rows.length >= maxColumns) {
           columns.add(_addColums(rows));
           rows.clear();
@@ -79,23 +65,21 @@ class _FlexRowState extends State<FlexRow> {
   }
 
   Widget _addColums(List<Widget> widgets) {
-    print("Add columns: " + widgets.length.toString());
     return Row(
       children: List.from(widgets),
       //crossAxisAlignment: widget.colCrossAxisAlignment,
-      mainAxisSize: widget.colMainAxisSize,
-      mainAxisAlignment: widget.colMainAxisAlignment,
-      verticalDirection: widget.colVerticalDirection,
+      mainAxisSize: colMainAxisSize,
+      mainAxisAlignment: colMainAxisAlignment,
+      verticalDirection: colVerticalDirection,
     );
   }
 
   Widget _addRows(List<Widget> widgets) {
-    print("Add rows: " + widgets.length.toString());
     return Column(
       children: List.from(widgets),
-      mainAxisSize: widget.rowMainAxisSize,
-      mainAxisAlignment: widget.rowMainAxisAlignment,
-      verticalDirection: widget.rowVerticalDirection,
+      mainAxisSize: rowMainAxisSize,
+      mainAxisAlignment: rowMainAxisAlignment,
+      verticalDirection: rowVerticalDirection,
       //crossAxisAlignment: widget.rowCrossAxisAlignment,
     );
   }
