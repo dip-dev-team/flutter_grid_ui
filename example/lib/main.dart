@@ -50,8 +50,6 @@ class _MyHomePageState extends State<MyHomePage> {
           rowMainAxisAlignment: MainAxisAlignment.spaceAround,
           rowVerticalDirection: VerticalDirection.down,
           rowMainAxisSize: MainAxisSize.max,
-
-
           children: <Widget>[
             Text(
               'You have pushed the button this many times:',
@@ -60,15 +58,9 @@ class _MyHomePageState extends State<MyHomePage> {
               '$_counter',
               style: Theme.of(context).textTheme.display1,
             ),
-             Text(
-             "3"
-            ),
-             Text(
-             "4"
-            ),
-             Text(  
-             "5"
-            ),
+            Text("3"),
+            Text("4"),
+            Text("5"),
           ],
         ),
       ),
