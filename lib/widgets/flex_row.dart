@@ -10,7 +10,7 @@ class FlexRow extends StatelessWidget with ScreenSize {
   final MainAxisAlignment colMainAxisAlignment, rowMainAxisAlignment;
   final VerticalDirection colVerticalDirection, rowVerticalDirection;
 
-  FlexRow({
+  const FlexRow({
     Key key,
     int colXS = 1,
     int colSm = 1,
@@ -44,7 +44,7 @@ class FlexRow extends StatelessWidget with ScreenSize {
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-      int maxColumns = this.getMaxColumns(context,
+      int maxColumns = ScreenSize.getMaxColumns(context,
           colXS: colXS, colSm: colSm, colMd: colMd, colLg: colLg);
       //Size widgetSize = Size(constraints.maxWidth, constraints.maxHeight);
       List<Widget> columns = [];

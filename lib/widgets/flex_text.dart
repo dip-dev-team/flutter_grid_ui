@@ -75,64 +75,68 @@ class FlexText extends Text with ScreenSize {
 
   @override
   Widget build(BuildContext context) {
-    DefaultTextStyle defaultTextStyle = DefaultTextStyle.of(context);
-    TextStyle effectiveTextStyle = style;
-    TextStyle effectiveXSTextStyle = styleXS;
-    TextStyle effectiveSmTextStyle = styleSm;
-    TextStyle effectiveMdTextStyle = styleMd;
-    TextStyle effectiveLgTextStyle = styleLg;
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+      DefaultTextStyle defaultTextStyle = DefaultTextStyle.of(context);
+      TextStyle effectiveTextStyle = style;
+      TextStyle effectiveXSTextStyle = styleXS;
+      TextStyle effectiveSmTextStyle = styleSm;
+      TextStyle effectiveMdTextStyle = styleMd;
+      TextStyle effectiveLgTextStyle = styleLg;
 
-    if (style == null || style.inherit)
-      effectiveTextStyle = defaultTextStyle.style.merge(style);
+      if (style == null || style.inherit)
+        effectiveTextStyle = defaultTextStyle.style.merge(style);
 
-    if (styleXS == null || styleXS.inherit)
-      effectiveXSTextStyle = effectiveTextStyle.merge(styleXS);
+      if (styleXS == null || styleXS.inherit)
+        effectiveXSTextStyle = effectiveTextStyle.merge(styleXS);
 
-    if (styleSm == null || styleSm.inherit)
-      effectiveSmTextStyle = effectiveXSTextStyle.merge(styleSm);
+      if (styleSm == null || styleSm.inherit)
+        effectiveSmTextStyle = effectiveXSTextStyle.merge(styleSm);
 
-    if (styleMd == null || styleMd.inherit)
-      effectiveMdTextStyle = effectiveSmTextStyle.merge(styleMd);
+      if (styleMd == null || styleMd.inherit)
+        effectiveMdTextStyle = effectiveSmTextStyle.merge(styleMd);
 
-    if (styleLg == null || styleLg.inherit)
-      effectiveLgTextStyle = effectiveMdTextStyle.merge(styleLg);
+      if (styleLg == null || styleLg.inherit)
+        effectiveLgTextStyle = effectiveMdTextStyle.merge(styleLg);
 
-    TextStyle currentStyle = this.geFontStyle(context,
-        styleXS: effectiveXSTextStyle,
-        styleSm: effectiveSmTextStyle,
-        styleMd: effectiveMdTextStyle,
-        styleLg: effectiveLgTextStyle);
+      TextStyle currentStyle = ScreenSize.getTextStyle(context,
+          styleXS: effectiveXSTextStyle,
+          styleSm: effectiveSmTextStyle,
+          styleMd: effectiveMdTextStyle,
+          styleLg: effectiveLgTextStyle);
 
-    if (MediaQuery.boldTextOverride(context))
-      currentStyle =
-          currentStyle.merge(const TextStyle(fontWeight: FontWeight.bold));
-    Widget result = RichText(
-      textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
-      textDirection:
-          textDirection, // RichText uses Directionality.of to obtain a default if this is null.
-      locale:
-          locale, // RichText uses Localizations.localeOf to obtain a default if this is null
-      softWrap: softWrap ?? defaultTextStyle.softWrap,
-      overflow: overflow ?? defaultTextStyle.overflow,
-      textScaleFactor: textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
-      maxLines: maxLines ?? defaultTextStyle.maxLines,
-      strutStyle: strutStyle,
-      textWidthBasis: textWidthBasis ?? defaultTextStyle.textWidthBasis,
-      text: TextSpan(
-        style: currentStyle,
-        text: data,
-        children: textSpan != null ? <InlineSpan>[textSpan] : null,
-      ),
-    );
-    if (semanticsLabel != null) {
-      result = Semantics(
-        textDirection: textDirection,
-        label: semanticsLabel,
-        child: ExcludeSemantics(
-          child: result,
+      if (MediaQuery.boldTextOverride(context))
+        currentStyle =
+            currentStyle.merge(const TextStyle(fontWeight: FontWeight.bold));
+      Widget result = RichText(
+        textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
+        textDirection:
+            textDirection, // RichText uses Directionality.of to obtain a default if this is null.
+        locale:
+            locale, // RichText uses Localizations.localeOf to obtain a default if this is null
+        softWrap: softWrap ?? defaultTextStyle.softWrap,
+        overflow: overflow ?? defaultTextStyle.overflow,
+        textScaleFactor:
+            textScaleFactor ?? MediaQuery.textScaleFactorOf(context),
+        maxLines: maxLines ?? defaultTextStyle.maxLines,
+        strutStyle: strutStyle,
+        textWidthBasis: textWidthBasis ?? defaultTextStyle.textWidthBasis,
+        text: TextSpan(
+          style: currentStyle,
+          text: data,
+          children: textSpan != null ? <InlineSpan>[textSpan] : null,
         ),
       );
-    }
-    return result;
+      if (semanticsLabel != null) {
+        result = Semantics(
+          textDirection: textDirection,
+          label: semanticsLabel,
+          child: ExcludeSemantics(
+            child: result,
+          ),
+        );
+      }
+      return result;
+    });
   }
 }

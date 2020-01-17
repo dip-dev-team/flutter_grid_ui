@@ -8,7 +8,14 @@ To use this package, add `flutter_flexui` as a [dependency in your pubspec.yaml 
 
 ```yaml
 dependencies:
-  flutter_flexui: ^0.0.2
+  flutter_flexui: ^0.0.3
+```
+
+
+## Using
+
+```dart
+import 'package:flutter_flexui/flexui.dart';
 ```
 
 ### Example
@@ -31,8 +38,7 @@ dependencies:
       Text('2'),
       Text('3'),
       Text('4'),
-      Text('5'),
-    ],);
+      Text('5'),],);
 ```
 
 #### FlexText
@@ -42,11 +48,19 @@ dependencies:
     "Test",
     styleSm: TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
     styleMd: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-    styleLg: TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
-    );
+    styleLg: TextStyle(fontWeight: FontWeight.w900, fontSize: 22),);
 ```
 
-### Authors
+#### FlexWidget
+
+```dart
+  FlexWidget(
+    sm: Text("Small"),
+    md: Text("Meddium"),
+    lg: Text("Large"),);
+```
+
+## Authors
 
 ```
 This project developed by DipDev Studio Team: @Dimoshka

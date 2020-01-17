@@ -1,19 +1,11 @@
 import 'package:flutter/widgets.dart';
 
 class ScreenSize {
-  /* final BuildContext context;
-
-  ScreenSize(this.context);
-
-  Screen get screen {
-    return screenSize(this.context);
-  } */
-
   /// @Screen.XS (for phones - screens less than 768px wide)
   /// @Screen.SM (for tablets - screens equal to or greater than 768px wide)
   /// @Screen.MD (for small laptops - screens equal to or greater than 992px wide)
   /// @Screen.LG (for laptops and desktops - screens equal to or greater than 1200px wide)
-  Screen screenSize(BuildContext context) {
+  static Screen screenSize(BuildContext context) {
     double screenWidth = MediaQuery.of(context).size.width;
     if (screenWidth >= 1200) {
       return Screen.LG;
@@ -26,7 +18,7 @@ class ScreenSize {
     }
   }
 
-  int getMaxColumns(
+  static int getMaxColumns(
     BuildContext context, {
     int colXS = 1,
     int colSm = 1,
@@ -48,7 +40,7 @@ class ScreenSize {
     }
   }
 
-  TextStyle geFontStyle(
+  static TextStyle getTextStyle(
     BuildContext context, {
     TextStyle styleXS,
     TextStyle styleSm,
@@ -57,16 +49,46 @@ class ScreenSize {
   }) {
     switch (screenSize(context)) {
       case Screen.LG:
-        return styleLg;
+        return styleLg != null
+            ? styleLg
+            : styleLg != null ? styleMd : styleSm != null ? styleSm : styleXS;
         break;
       case Screen.MD:
-        return styleMd;
+        return styleMd != null
+            ? styleMd
+            : styleSm != null ? styleSm : styleXS != null ? styleXS : styleLg;
         break;
       case Screen.SM:
-        return styleSm;
+        return styleSm != null
+            ? styleSm
+            : styleXS != null ? styleXS : styleMd != null ? styleMd : styleLg;
         break;
       default:
-        return styleXS;
+        return styleXS != null
+            ? styleXS
+            : styleSm != null ? styleSm : styleMd != null ? styleMd : styleLg;
+    }
+  }
+
+  static Widget getWidget(
+    BuildContext context, {
+    Widget xs,
+    Widget sm,
+    Widget md,
+    Widget lg,
+  }) {
+    switch (screenSize(context)) {
+      case Screen.LG:
+        return lg != null ? lg : md != null ? md : sm != null ? sm : xs;
+        break;
+      case Screen.MD:
+        return md != null ? md : sm != null ? sm : xs != null ? xs : lg;
+        break;
+      case Screen.SM:
+        return sm != null ? sm : xs != null ? xs : md != null ? md : lg;
+        break;
+      default:
+        return xs != null ? xs : sm != null ? sm : md != null ? md : lg;
     }
   }
 }

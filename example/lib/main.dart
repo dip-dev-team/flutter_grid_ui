@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_flexui/widgets/flex_row.dart';
-import 'package:flutter_flexui/widgets/flex_text.dart';
+import 'package:flutter_flexui/flexui.dart';
 
 void main() => runApp(MyApp());
 
@@ -41,36 +40,45 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: FlexRow(
-          colLg: 6,
-          colMd: 3,
-          colSm: 1,
-          colMainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          colVerticalDirection: VerticalDirection.down,
-          colMainAxisSize: MainAxisSize.max,
-          rowMainAxisAlignment: MainAxisAlignment.spaceAround,
-          rowVerticalDirection: VerticalDirection.down,
-          rowMainAxisSize: MainAxisSize.max,
+        child: Column(
           children: <Widget>[
-            FlexText(
-              'You have pushed the button this many times:',
+            FlexRow(
+              colLg: 6,
+              colMd: 3,
+              colSm: 1,
+              colMainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              colVerticalDirection: VerticalDirection.down,
+              colMainAxisSize: MainAxisSize.max,
+              rowMainAxisAlignment: MainAxisAlignment.spaceAround,
+              rowVerticalDirection: VerticalDirection.down,
+              rowMainAxisSize: MainAxisSize.max,
+              children: <Widget>[
+                FlexText(
+                  'You have pushed the button this many times:',
+                ),
+                FlexText(
+                  '$_counter',
+                  style: Theme.of(context).textTheme.display1,
+                ),
+                FlexText(
+                  "3",
+                  styleSm: TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
+                  styleMd: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                  styleLg: TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
+                ),
+                FlexText("4"),
+                FlexText(
+                  "5",
+                  styleSm: TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
+                  styleMd: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                  styleLg: TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
+                ),
+              ],
             ),
-            FlexText(
-              '$_counter',
-              style: Theme.of(context).textTheme.display1,
-            ),
-            FlexText(
-              "3",
-              styleSm: TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
-              styleMd: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-              styleLg: TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
-            ),
-            FlexText("4"),
-            FlexText(
-              "5",
-              styleSm: TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
-              styleMd: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-              styleLg: TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
+            FlexWidget(
+              sm: Text(
+                  "Is mobile device: ${FlexUI.isMobile(context).toString()}"),
+              md: Text("Desktop version!"),
             ),
           ],
         ),
