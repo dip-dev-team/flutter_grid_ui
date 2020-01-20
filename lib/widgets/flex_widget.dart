@@ -14,7 +14,8 @@ class FlexWidget extends StatelessWidget with ScreenSize {
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-      return ScreenSize.getWidget(context, xs: xs, sm: sm, md: md, lg: lg);
+      return ScreenSize.getValueByScreen(context,
+          xs: xs, sm: sm, md: md, lg: lg);
     });
   }
 }

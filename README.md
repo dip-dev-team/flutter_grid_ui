@@ -1,4 +1,5 @@
-# flutter_flexui
+Flutter FlexUI
+===============
 
 Flutter package for build Flexible UI for diference screens
 
@@ -8,9 +9,8 @@ To use this package, add `flutter_flexui` as a [dependency in your pubspec.yaml 
 
 ```yaml
 dependencies:
-  flutter_flexui: ^0.0.3
+  flutter_flexui: ^0.1.0
 ```
-
 
 ## Using
 
@@ -38,7 +38,9 @@ import 'package:flutter_flexui/flexui.dart';
       Text('2'),
       Text('3'),
       Text('4'),
-      Text('5'),],);
+      Text('5'),
+      ],
+  );
 ```
 
 #### FlexText
@@ -48,7 +50,8 @@ import 'package:flutter_flexui/flexui.dart';
     "Test",
     styleSm: TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
     styleMd: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-    styleLg: TextStyle(fontWeight: FontWeight.w900, fontSize: 22),);
+    styleLg: TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
+  );
 ```
 
 #### FlexWidget
@@ -57,11 +60,49 @@ import 'package:flutter_flexui/flexui.dart';
   FlexWidget(
     sm: Text("Small"),
     md: Text("Meddium"),
-    lg: Text("Large"),);
+    lg: Text("Large"),
+  );
+```
+
+### Utils
+
+#### ScreenSize
+
+```dart
+  /// @Screen.XS (for phones - screens less than 768px wide)
+  /// @Screen.SM (for tablets - screens equal to or greater than 768px wide)
+  /// @Screen.MD (for small laptops - screens equal to or greater than 992px wide)
+  /// @Screen.LG (for laptops and desktops - screens equal to or greater than 1200px wide)
+  ScreenSize.screenSize(context);
+```
+
+```dart
+  // Get height of status bar
+  ScreenSize.statusBarHeight(context);
+```
+
+```dart
+  // Get height of bottom bar
+  ScreenSize.bottomBarHeight(context);
+```
+
+```dart
+  // Get pixel ratio of screen
+  ScreenSize.pixelRatio(context);
+```
+
+```dart
+  // Get value by screen size
+  ScreenSize.getValueByScreen(context, xsObject, smObject, mdObject, lgObject);
+```
+
+#### FlexUI
+
+```dart
+  // Returns true if the screen size is similar to a mobile device
+  FlexUI.isMobile(context);
 ```
 
 ## Authors
 
-```
-This project developed by DipDev Studio Team: @Dimoshka
-```
+> This project developed by [**DipDev Studio**](https://dipdev.studio) Team: [@Dimoshka](https://www.linkedin.com/in/dmytroprylutskyi/)

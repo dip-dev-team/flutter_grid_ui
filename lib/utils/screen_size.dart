@@ -6,7 +6,7 @@ class ScreenSize {
   /// @Screen.MD (for small laptops - screens equal to or greater than 992px wide)
   /// @Screen.LG (for laptops and desktops - screens equal to or greater than 1200px wide)
   static Screen screenSize(BuildContext context) {
-    double screenWidth = MediaQuery.of(context).size.width;
+    double screenWidth = ScreenSize.getMediaQuery(context).size.width;
     if (screenWidth >= 1200) {
       return Screen.LG;
     } else if (screenWidth >= 992) {
@@ -18,68 +18,32 @@ class ScreenSize {
     }
   }
 
-  static int getMaxColumns(
-    BuildContext context, {
-    int colXS = 1,
-    int colSm = 1,
-    int colMd = 1,
-    int colLg = 1,
-  }) {
-    switch (screenSize(context)) {
-      case Screen.LG:
-        return colLg;
-        break;
-      case Screen.MD:
-        return colMd;
-        break;
-      case Screen.SM:
-        return colSm;
-        break;
-      default:
-        return colXS;
-    }
+  // Get height of status bar
+  static double statusBarHeight(BuildContext context) {
+    return ScreenSize.getMediaQuery(context).padding.top;
   }
 
-  static TextStyle getTextStyle(
-    BuildContext context, {
-    TextStyle styleXS,
-    TextStyle styleSm,
-    TextStyle styleMd,
-    TextStyle styleLg,
-  }) {
-    switch (screenSize(context)) {
-      case Screen.LG:
-        return styleLg != null
-            ? styleLg
-            : styleLg != null ? styleMd : styleSm != null ? styleSm : styleXS;
-        break;
-      case Screen.MD:
-        return styleMd != null
-            ? styleMd
-            : styleSm != null ? styleSm : styleXS != null ? styleXS : styleLg;
-        break;
-      case Screen.SM:
-        return styleSm != null
-            ? styleSm
-            : styleXS != null ? styleXS : styleMd != null ? styleMd : styleLg;
-        break;
-      default:
-        return styleXS != null
-            ? styleXS
-            : styleSm != null ? styleSm : styleMd != null ? styleMd : styleLg;
-    }
+  // Get height of bottom bar
+  static double bottomBarHeight(BuildContext context) {
+    return ScreenSize.getMediaQuery(context).padding.bottom;
   }
 
-  static Widget getWidget(
+  // Get pixel ratio of screen
+  static double pixelRatio(BuildContext context) {
+    return ScreenSize.getMediaQuery(context).devicePixelRatio;
+  }
+
+  // Get value by screen size
+  static T getValueByScreen<T extends Object>(
     BuildContext context, {
-    Widget xs,
-    Widget sm,
-    Widget md,
-    Widget lg,
+    T xs,
+    T sm,
+    T md,
+    T lg,
   }) {
     switch (screenSize(context)) {
       case Screen.LG:
-        return lg != null ? lg : md != null ? md : sm != null ? sm : xs;
+        return lg != null ? lg : lg != null ? md : sm != null ? sm : xs;
         break;
       case Screen.MD:
         return md != null ? md : sm != null ? sm : xs != null ? xs : lg;
@@ -90,6 +54,10 @@ class ScreenSize {
       default:
         return xs != null ? xs : sm != null ? sm : md != null ? md : lg;
     }
+  }
+
+  static MediaQueryData getMediaQuery(BuildContext context) {
+    return MediaQuery.of(context);
   }
 }
 

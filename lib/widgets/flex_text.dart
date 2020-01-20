@@ -99,21 +99,19 @@ class FlexText extends Text with ScreenSize {
       if (styleLg == null || styleLg.inherit)
         effectiveLgTextStyle = effectiveMdTextStyle.merge(styleLg);
 
-      TextStyle currentStyle = ScreenSize.getTextStyle(context,
-          styleXS: effectiveXSTextStyle,
-          styleSm: effectiveSmTextStyle,
-          styleMd: effectiveMdTextStyle,
-          styleLg: effectiveLgTextStyle);
+      TextStyle currentStyle = ScreenSize.getValueByScreen(context,
+          xs: effectiveXSTextStyle,
+          sm: effectiveSmTextStyle,
+          md: effectiveMdTextStyle,
+          lg: effectiveLgTextStyle);
 
       if (MediaQuery.boldTextOverride(context))
         currentStyle =
             currentStyle.merge(const TextStyle(fontWeight: FontWeight.bold));
       Widget result = RichText(
         textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
-        textDirection:
-            textDirection, // RichText uses Directionality.of to obtain a default if this is null.
-        locale:
-            locale, // RichText uses Localizations.localeOf to obtain a default if this is null
+        textDirection: textDirection,
+        locale: locale,
         softWrap: softWrap ?? defaultTextStyle.softWrap,
         overflow: overflow ?? defaultTextStyle.overflow,
         textScaleFactor:
