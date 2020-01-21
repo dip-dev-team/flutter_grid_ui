@@ -43,7 +43,7 @@ class ScreenSize {
   }) {
     switch (screenSize(context)) {
       case Screen.LG:
-        return lg != null ? lg : lg != null ? md : sm != null ? sm : xs;
+        return lg != null ? lg : md != null ? md : sm != null ? sm : xs;
         break;
       case Screen.MD:
         return md != null ? md : sm != null ? sm : xs != null ? xs : lg;

@@ -1,3 +1,7 @@
+## [0.1.0+1] - January 20, 2020.
+
+Fix getValueByScreen.
+
 ## [0.1.0] - January 20, 2020.
 
 Refactoring.
