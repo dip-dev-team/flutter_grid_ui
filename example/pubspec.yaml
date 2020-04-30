@@ -1,6 +1,6 @@
 name: flutter_flexui_example
 description: Example for flutter package for build Flexible UI for diference screens
-version: 1.0.0+1
+version: 1.0.1+2
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -8,7 +8,6 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  cupertino_icons: ^0.1.2
   flutter_flexui:
     path: ../
 

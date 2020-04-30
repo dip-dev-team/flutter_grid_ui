@@ -1,7 +1,8 @@
 import 'package:flutter/widgets.dart';
-import 'package:flutter_flexui/utils/screen_size.dart';
+import 'package:flutter_flexui/utils/screen.dart';
 
-class FlexText extends Text with ScreenSize {
+class FlexText extends Text with Screen {
+  /// Creates a Text widget, which adapts text style according to screen size
   const FlexText(
     this.data, {
     Key key,
@@ -99,7 +100,7 @@ class FlexText extends Text with ScreenSize {
       if (styleLg == null || styleLg.inherit)
         effectiveLgTextStyle = effectiveMdTextStyle.merge(styleLg);
 
-      TextStyle currentStyle = ScreenSize.getValueByScreen(context,
+      TextStyle currentStyle = Screen.valueByScreen(context,
           xs: effectiveXSTextStyle,
           sm: effectiveSmTextStyle,
           md: effectiveMdTextStyle,

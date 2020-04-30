@@ -9,7 +9,7 @@ To use this package, add `flutter_flexui` as a [dependency in your pubspec.yaml 
 
 ```yaml
 dependencies:
-  flutter_flexui: ^0.1.0+1
+  flutter_flexui: ^0.1.1
 ```
 
 ## Using
@@ -66,41 +66,102 @@ import 'package:flutter_flexui/flexui.dart';
 
 ### Utils
 
-#### ScreenSize
+#### Screen
 
 ```dart
-  /// @Screen.XS (for phones - screens less than 768px wide)
-  /// @Screen.SM (for tablets - screens equal to or greater than 768px wide)
-  /// @Screen.MD (for small laptops - screens equal to or greater than 992px wide)
-  /// @Screen.LG (for laptops and desktops - screens equal to or greater than 1200px wide)
-  ScreenSize.screenSize(context);
+  /// Return @ScreenSize
+  /// @ScreenSize.XS (for phones - screens less than 768px wide)
+  /// @ScreenSize.SM (for tablets - screens equal to or greater than 768px wide)
+  /// @ScreenSize.MD (for small laptops - screens equal to or greater than 992px wide)
+  /// @ScreenSize.LG (for laptops and desktops - screens equal to or greater than 1200px wide)
+  Screen.screenSize(context);
 ```
 
 ```dart
-  // Get height of status bar
-  ScreenSize.statusBarHeight(context);
+  /// Get MediaQueryData
+  Screen.mediaQuery(context);
 ```
 
 ```dart
-  // Get height of bottom bar
-  ScreenSize.bottomBarHeight(context);
+  Screen.size(context);
 ```
 
 ```dart
-  // Get pixel ratio of screen
-  ScreenSize.pixelRatio(context);
+  Screen.width(context);
+```
+
+```dart
+  Screen.height(context);
+```
+
+```dart
+  /// Get pixel ratio of screen
+  Screen.pixelRatio(context);
+```
+
+```dart
+  /// Screen diagonal
+  Screen.diagonal(context);
+```
+
+```dart
+  Screen.diagonalInches(context);
+```
+
+```dart
+  Screen.statusBarHeight(context);
+```
+
+```dart
+  Screen.bottomBarHeight(context);
 ```
 
 ```dart
   // Get value by screen size
-  ScreenSize.getValueByScreen(context, xsObject, smObject, mdObject, lgObject);
+  Screen.valueByScreen(context, xsObject, smObject, mdObject, lgObject);
 ```
 
-#### FlexUI
+#### Device
 
 ```dart
-  // Returns true if the screen size is similar to a mobile device
-  FlexUI.isMobile(context);
+   Device.isDesktop
+```
+
+```dart
+  Device.isMobile
+```
+
+```dart
+  Device.isWeb
+```
+
+```dart
+  Device.isWindows
+```
+
+```dart
+  Device.isLinux
+```
+
+```dart
+  Device.isMacOS
+```
+
+```dart
+  Device.isAndroid
+```
+
+```dart
+  Device.isFuchsia
+```
+
+```dart
+  Device.isIOS
+```
+
+```dart
+  /// Get @DeviceType
+  Device.deviceType(context)
 ```
 
 ## Authors
