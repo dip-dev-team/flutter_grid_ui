@@ -40,12 +40,43 @@ class _MyHomePageState extends State<MyHomePage> {
         title: Text(widget.title),
       ),
       body: Center(
-        child: Column(
+        child: ListView(
           children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Row(
+                children: <Widget>[
+                  FlexText(
+                    'You have pushed the button this many times:',
+                    styleSm:
+                        TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
+                    styleMd:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                    styleLg:
+                        TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
+                  ),
+                  FlexText(
+                    '$_counter',
+                    styleSm:
+                        TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
+                    styleMd:
+                        TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
+                    styleLg:
+                        TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
+                  ),
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child:
+                  Text("FlexRow", style: Theme.of(context).textTheme.headline4),
+            ),
             FlexRow(
               colLg: 6,
               colMd: 3,
-              colSm: 1,
+              colSm: 2,
+              colXS: 1,
               colMainAxisAlignment: MainAxisAlignment.spaceEvenly,
               colVerticalDirection: VerticalDirection.down,
               colMainAxisSize: MainAxisSize.max,
@@ -53,32 +84,17 @@ class _MyHomePageState extends State<MyHomePage> {
               rowVerticalDirection: VerticalDirection.down,
               rowMainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                FlexText(
-                  'You have pushed the button this many times:',
+                Text("Width: ${Screen.width(context)}"),
+                Text("Height: ${Screen.height(context)}"),
+                Text("PixelRation: ${Screen.pixelRatio(context)}"),
+                Text("Diagonal: ${Screen.diagonalInches(context)}"),
+                Text(
+                  "Screen: ${Screen.screenSize(context).toString()}",
                 ),
-                FlexText(
-                  '$_counter',
-                  style: Theme.of(context).textTheme.display1,
-                ),
-                FlexText(
-                  "3",
-                  styleSm: TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
-                  styleMd: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                  styleLg: TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
-                ),
-                FlexText("4"),
-                FlexText(
-                  "5",
-                  styleSm: TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
-                  styleMd: TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                  styleLg: TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
+                Text(
+                  "Device: ${Device.deviceType(context).toString()}",
                 ),
               ],
-            ),
-            FlexWidget(
-              sm: Text(
-                  "Is mobile device: ${FlexUI.isMobile(context).toString()}"),
-              md: Text("Desktop version!"),
             ),
           ],
         ),
@@ -87,7 +103,7 @@ class _MyHomePageState extends State<MyHomePage> {
         onPressed: _incrementCounter,
         tooltip: 'Increment',
         child: Icon(Icons.add),
-      ), // This trailing comma makes auto-formatting nicer for build methods.
+      ),
     );
   }
 }

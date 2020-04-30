@@ -1,3 +1,7 @@
+## [0.1.1] - April 2, 2020.
+
+Adding new feature.
+
 ## [0.1.0+1] - January 20, 2020.
 
 Fix getValueByScreen.
@@ -12,7 +16,7 @@ Added new features.
 
 ## [0.0.2] - January 13, 2020.
 
-Add FlexText widget.
+Added a FlexText widget.
 
 ## [0.0.1+1] - January 13, 2020.
 
