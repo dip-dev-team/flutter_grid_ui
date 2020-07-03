@@ -1,3 +1,7 @@
+## [0.1.2] - July 3, 2020.
+
+Fix device type when IOS.
+
 ## [0.1.1] - April 2, 2020.
 
 Adding new feature.

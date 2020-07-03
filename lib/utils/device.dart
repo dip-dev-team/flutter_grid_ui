@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'package:universal_io/io.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
@@ -33,21 +33,13 @@ class Device {
       }
     } else if (isDesktop) {
       return DeviceType.LAPTOP;
-    } else if (isAndroid) {
+    } else if (isAndroid || isIOS || isFuchsia) {
       if (screenSize == ScreenSize.XS) {
         return DeviceType.MOBILE;
       } else if (screenSize == ScreenSize.SM) {
         return DeviceType.TABLET;
       } else if (screenSize == ScreenSize.MD || screenSize == ScreenSize.LG) {
         return DeviceType.TV;
-      } else {
-        return DeviceType.UNKNOWN;
-      }
-    } else if (isWeb) {
-      if (screenSize == ScreenSize.XS) {
-        return DeviceType.MOBILE;
-      } else if (screenSize == ScreenSize.SM) {
-        return DeviceType.TABLET;
       } else {
         return DeviceType.UNKNOWN;
       }

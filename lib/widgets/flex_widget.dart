@@ -15,8 +15,7 @@ class FlexWidget extends StatelessWidget with Screen {
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-      return Screen.valueByScreen(context,
-          xs: xs, sm: sm, md: md, lg: lg);
+      return Screen.valueByScreen(context, xs: xs, sm: sm, md: md, lg: lg);
     });
   }
 }

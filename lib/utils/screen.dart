@@ -19,9 +19,9 @@ class Screen {
 
     if (diagonalInches >= 21.0 && value >= 1200.0) {
       return ScreenSize.LG;
-    } else if (diagonalInches >= 11.0 || value >= 992.0) {
+    } else if (diagonalInches >= 11.0 && value >= 992.0) {
       return ScreenSize.MD;
-    } else if (diagonalInches >= 7.0 || value >= 768.0) {
+    } else if (diagonalInches >= 8.0 && value >= 768.0) {
       return ScreenSize.SM;
     } else {
       return ScreenSize.XS;
@@ -34,9 +34,11 @@ class Screen {
   static Size size(BuildContext context) => MediaQuery.of(context).size;
   static double width(BuildContext context) => size(context).width;
   static double height(BuildContext context) => size(context).height;
+
   /// Get pixel ratio of screen
   static double pixelRatio(BuildContext context) =>
       Screen.mediaQuery(context).devicePixelRatio;
+
   /// Screen diagonal
   static double diagonal(BuildContext context) {
     Size s = size(context);
