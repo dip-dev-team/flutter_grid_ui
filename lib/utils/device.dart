@@ -1,3 +1,4 @@
+import 'package:device_info/device_info.dart';
 import 'package:universal_io/io.dart';
 
 import 'package:flutter/cupertino.dart';
@@ -6,7 +7,6 @@ import 'package:flutter_flexui/utils/screen.dart';
 
 class Device {
   static bool get isDesktop => !isWeb && (isWindows || isLinux || isMacOS);
-  static bool get isMobile => !isWeb && (isAndroid || isIOS);
   static bool get isWeb => kIsWeb;
 
   static bool get isWindows => Platform.isWindows;
@@ -16,11 +16,18 @@ class Device {
   static bool get isFuchsia => Platform.isFuchsia;
   static bool get isIOS => Platform.isIOS;
 
+  static Future<bool> isMobile(BuildContext context) async {
+    return await deviceType(context) == DeviceType.MOBILE;
+  }
+
   /// Get @DeviceType
-  static DeviceType deviceType(BuildContext context) {
+  static Future<DeviceType> deviceType(BuildContext context) async {
     final screenSize = Screen.screenSize(context);
+    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if (isWeb) {
-      if (screenSize == ScreenSize.XS) {
+      if (isWindows || isLinux || isMacOS) {
+        return DeviceType.LAPTOP;
+      } else if (screenSize == ScreenSize.XS) {
         return DeviceType.MOBILE;
       } else if (screenSize == ScreenSize.SM) {
         return DeviceType.TABLET;
@@ -33,7 +40,17 @@ class Device {
       }
     } else if (isDesktop) {
       return DeviceType.LAPTOP;
-    } else if (isAndroid || isIOS || isFuchsia) {
+    } else if (isAndroid || isIOS) {
+      if (isAndroid) {
+        AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+        if (androidInfo.model.contains('AFTT') || androidInfo.model.contains('tv')) {
+          return DeviceType.TV;
+        }
+        debugPrint(androidInfo.toString());
+      } else if (isIOS) {
+        IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
+        debugPrint(iosInfo.toString());
+      }
       if (screenSize == ScreenSize.XS) {
         return DeviceType.MOBILE;
       } else if (screenSize == ScreenSize.SM) {

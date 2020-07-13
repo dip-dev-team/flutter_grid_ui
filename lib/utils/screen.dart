@@ -5,7 +5,7 @@ import 'package:flutter_flexui/utils/device.dart';
 
 class Screen {
   // Approximate Pixel Density
-  static double get _ppi => Device.isWeb ? 150 : Device.isMobile ? 160 : 96;
+  static double get _ppi => Device.isWeb ? 150 : Device.isAndroid || Device.isIOS ? 160 : 96;
 
   /// @ScreenSize.XS (for phones - screens less than 768px wide)
   /// @ScreenSize.SM (for tablets - screens equal to or greater than 768px wide)
@@ -31,7 +31,7 @@ class Screen {
   /// Get MediaQueryData
   static MediaQueryData mediaQuery(BuildContext context) =>
       MediaQuery.of(context);
-  static Size size(BuildContext context) => MediaQuery.of(context).size;
+  static Size size(BuildContext context) => mediaQuery(context).size;
   static double width(BuildContext context) => size(context).width;
   static double height(BuildContext context) => size(context).height;
 
@@ -107,3 +107,4 @@ enum ScreenSize {
 // TV
 // Android TV 1080p - 55` 1920x1080 (960x540, 2.0)
 // Android TV 720p - 55` 1280x720 (961.50x540.84, 1.331)
+// Fire Stick -

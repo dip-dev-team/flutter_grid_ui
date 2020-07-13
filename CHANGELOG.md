@@ -1,3 +1,7 @@
+## [0.1.3] - July 13, 2020.
+
+Fix device type for Fire Stick.
+
 ## [0.1.2] - July 3, 2020.
 
 Fix device type when IOS.
