@@ -5,7 +5,8 @@ import 'package:flutter_flexui/utils/device.dart';
 
 class Screen {
   // Approximate Pixel Density
-  static double get _ppi => Device.isWeb ? 150 : Device.isAndroid || Device.isIOS ? 160 : 96;
+  static double get _ppi =>
+      Device.isWeb ? 150 : Device.isAndroid || Device.isIOS ? 160 : 96;
 
   /// @ScreenSize.XS (for phones - screens less than 768px wide)
   /// @ScreenSize.SM (for tablets - screens equal to or greater than 768px wide)

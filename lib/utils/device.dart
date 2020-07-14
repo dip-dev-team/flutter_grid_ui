@@ -21,9 +21,13 @@ class Device {
   }
 
   /// Get @DeviceType
+  /// @DeviceType.MOBILE
+  /// @DeviceType.TABLET
+  /// @DeviceType.LAPTOP
+  /// @DeviceType.TV
+  /// @DeviceType.UNKNOWN
   static Future<DeviceType> deviceType(BuildContext context) async {
     final screenSize = Screen.screenSize(context);
-    DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
     if (isWeb) {
       if (isWindows || isLinux || isMacOS) {
         return DeviceType.LAPTOP;
@@ -41,9 +45,13 @@ class Device {
     } else if (isDesktop) {
       return DeviceType.LAPTOP;
     } else if (isAndroid || isIOS) {
+      DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       if (isAndroid) {
         AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-        if (androidInfo.model.contains('AFTT') || androidInfo.model.contains('tv')) {
+        final model = androidInfo.model.toUpperCase();
+        if (model.contains('AFT') ||
+            model.contains('BOX') ||
+            model.contains('TV')) {
           return DeviceType.TV;
         }
         debugPrint(androidInfo.toString());

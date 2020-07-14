@@ -1,3 +1,7 @@
+## [0.1.4] - July 14, 2020.
+
+Fix device type for Amazon devices.
+
 ## [0.1.3] - July 13, 2020.
 
 Fix device type for Fire Stick.
