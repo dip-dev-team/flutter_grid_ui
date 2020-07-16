@@ -1,3 +1,8 @@
+
+## [0.1.5] - July 16, 2020.
+
+Adding TVDeviceType.
+
 ## [0.1.4] - July 14, 2020.
 
 Fix device type for Amazon devices.

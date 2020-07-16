@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:flutter/widgets.dart';
+import 'package:universal_html/html.dart' as html;
 import 'package:flutter_flexui/utils/device.dart';
 
 class Screen {
@@ -11,8 +12,18 @@ class Screen {
   /// @ScreenSize.XS (for phones - screens less than 768px wide)
   /// @ScreenSize.SM (for tablets - screens equal to or greater than 768px wide)
   /// @ScreenSize.MD (for small laptops - screens equal to or greater than 992px wide)
-  /// @ScreenSize.LG (for laptops and desktops - screens equal to or greater than 1200px wide)
+  /// @ScreenSize.LG (for laptops and desktops and TV - biggers screens)
   static ScreenSize screenSize(BuildContext context) {
+    if (Device.isWeb) {
+      final appVersion = html.window.navigator.appVersion.toUpperCase();
+      if (appVersion.contains('TIZEN') ||
+          appVersion.contains('WEBOS') ||
+          appVersion.contains('BOX') ||
+          appVersion.contains('TV')) {
+        return ScreenSize.LG;
+      }
+    }
+
     final screenWidth = Screen.width(context);
     final screenHeight = Screen.height(context);
     final value = screenWidth > screenHeight ? screenWidth : screenHeight;
@@ -85,7 +96,7 @@ class Screen {
 /// @ScreenSize.XS - for phones
 /// @ScreenSize.SM  - tablets
 /// @ScreenSize.MD  - for small laptops
-/// @ScreenSize.LG  - for laptops and desktops
+/// @ScreenSize.LG  - for laptops and desktops and TV
 enum ScreenSize {
   XS,
   SM,

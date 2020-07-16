@@ -3,6 +3,7 @@ import 'package:universal_io/io.dart';
 
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+import 'package:universal_html/html.dart' as html;
 import 'package:flutter_flexui/utils/screen.dart';
 
 class Device {
@@ -29,7 +30,13 @@ class Device {
   static Future<DeviceType> deviceType(BuildContext context) async {
     final screenSize = Screen.screenSize(context);
     if (isWeb) {
-      if (isWindows || isLinux || isMacOS) {
+      final appVersion = html.window.navigator.appVersion.toUpperCase();
+      if (appVersion.contains('TIZEN') ||
+          appVersion.contains('WEBOS') ||
+          appVersion.contains('BOX') ||
+          appVersion.contains('TV')) {
+        return DeviceType.TV;
+      } else if (isWindows || isLinux || isMacOS) {
         return DeviceType.LAPTOP;
       } else if (screenSize == ScreenSize.XS) {
         return DeviceType.MOBILE;
@@ -54,7 +61,6 @@ class Device {
             model.contains('TV')) {
           return DeviceType.TV;
         }
-        debugPrint(androidInfo.toString());
       } else if (isIOS) {
         IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
         debugPrint(iosInfo.toString());
@@ -72,6 +78,41 @@ class Device {
       return DeviceType.UNKNOWN;
     }
   }
+
+  /// Get @TVDeviceType
+  /// @TVDeviceType.TIZEN
+  /// @TVDeviceType.WEBOS
+  /// @TVDeviceType.ANDROIDTV
+  /// @TVDeviceType.FIRETV
+  /// @TVDeviceType.MITV
+  /// @DeviceType.UNKNOWN
+  static Future<TVDeviceType> tvDeviceType(BuildContext context) async {
+    final deviceType = await Device.deviceType(context);
+    if (deviceType == DeviceType.TV) {
+      if (isWeb) {
+        final appVersion = html.window.navigator.appVersion.toUpperCase();
+        if (appVersion.contains('TIZEN')) {
+          return TVDeviceType.TIZEN;
+        } else if (appVersion.contains('WEBOS')) {
+          return TVDeviceType.WEBOS;
+        }
+      } else if (isAndroid) {
+        DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
+        if (isAndroid) {
+          AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
+          final model = androidInfo.model.toUpperCase();
+          if (model.contains('AFT')) {
+            return TVDeviceType.FIRETV;
+          } else if (model.contains('BOX')) {
+            return TVDeviceType.MITV;
+          } else if (model.contains('TV')) {
+            return TVDeviceType.ANDROIDTV;
+          }
+        }
+      }
+    }
+    return TVDeviceType.UNKNOWN;
+  }
 }
 
 /// @DeviceType
@@ -80,5 +121,15 @@ enum DeviceType {
   TABLET,
   LAPTOP,
   TV,
+  UNKNOWN,
+}
+
+/// @TVDeviceType
+enum TVDeviceType {
+  TIZEN,
+  WEBOS,
+  ANDROIDTV,
+  FIRETV,
+  MITV,
   UNKNOWN,
 }
