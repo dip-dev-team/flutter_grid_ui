@@ -9,7 +9,7 @@ To use this package, add `flutter_flexui` as a [dependency in your pubspec.yaml 
 
 ```yaml
 dependencies:
-  flutter_flexui: ^0.1.5
+  flutter_flexui: ^0.1.6
 ```
 
 ## Using

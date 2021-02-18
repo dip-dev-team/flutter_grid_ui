@@ -1,9 +1,10 @@
 name: flutter_flexui_example
 description: Example for flutter package for build Flexible UI for diference screens
-version: 1.0.1+2
+publish_to: none
+version: 1.0.3+3
 
 environment:
-  sdk: ">=2.1.0 <3.0.0"
+  sdk: ">=2.7.0 <3.0.0"
 
 dependencies:
   flutter:
