@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
+  MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
@@ -84,15 +84,15 @@ class _MyHomePageState extends State<MyHomePage> {
               rowVerticalDirection: VerticalDirection.down,
               rowMainAxisSize: MainAxisSize.max,
               children: <Widget>[
-                Text("Width: ${Screen.width(context)}"),
-                Text("Height: ${Screen.height(context)}"),
-                Text("PixelRation: ${Screen.pixelRatio(context)}"),
-                Text("Diagonal: ${Screen.diagonalInches(context)}"),
+                Text("Width: ${context.screenWidth}"),
+                Text("Height: ${context.screenHeight}"),
+                Text("PixelRation: ${context.pixelRatio}"),
+                Text("Diagonal: ${context.diagonalInches}"),
                 Text(
-                  "Screen: ${Screen.screenSize(context).toString()}",
+                  "Screen: ${context.screenSize.toString()}",
                 ),
                 Text(
-                  "Device: ${Device.deviceType(context).toString()}",
+                  "Device: ${context.deviceType.toString()}",
                 ),
               ],
             ),

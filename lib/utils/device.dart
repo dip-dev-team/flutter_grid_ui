@@ -1,11 +1,64 @@
-import 'package:device_info/device_info.dart';
-import 'package:universal_io/io.dart';
-
+// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
+
+// Package imports:
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:universal_html/html.dart' as html;
+import 'package:universal_io/io.dart';
+
+// Project imports:
 import 'package:flutter_flexui/utils/screen.dart';
 
+/// Device extension for context
+/// Like context.isDesktop
+extension DeviceExtension on BuildContext {
+  /// Get true if Web
+  bool get isWeb => Device.isWeb;
+
+  /// Get true if Windows
+  bool get isWindows => Device.isWindows;
+
+  /// Get true if Linux
+  bool get isLinux => Device.isLinux;
+
+  /// Get true if MacOS
+  bool get isMacOS => Device.isMacOS;
+
+  /// Get true if Android
+  bool get isAndroid => Device.isAndroid;
+
+  /// Get true if Fuchsia
+  bool get isFuchsia => Device.isFuchsia;
+
+  /// Get true if iOS
+  bool get isIOS => Device.isIOS;
+
+  /// Get true if Desktop
+  bool get isDesktop => Device.isDesktop;
+
+  /// Get true if Mobile
+  Future<bool> get isMobile => Device.isMobile(this);
+
+  /// Get @DeviceType
+  /// @DeviceType.MOBILE
+  /// @DeviceType.TABLET
+  /// @DeviceType.LAPTOP
+  /// @DeviceType.TV
+  /// @DeviceType.UNKNOWN
+  Future<DeviceType> get deviceType => Device.deviceType(this);
+
+  /// Get @TVDeviceType
+  /// @TVDeviceType.TIZEN
+  /// @TVDeviceType.WEBOS
+  /// @TVDeviceType.ANDROIDTV
+  /// @TVDeviceType.FIRETV
+  /// @TVDeviceType.MITV
+  /// @DeviceType.UNKNOWN
+  Future<TVDeviceType> get tvDeviceType => Device.tvDeviceType(this);
+}
+
+// Device utils
 class Device {
   static bool get isDesktop => !isWeb && (isWindows || isLinux || isMacOS);
   static bool get isWeb => kIsWeb;
@@ -55,7 +108,7 @@ class Device {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       if (isAndroid) {
         AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-        final model = androidInfo.model.toUpperCase();
+        final model = androidInfo.model!.toUpperCase();
         if (model.contains('AFT') ||
             model.contains('BOX') ||
             model.contains('TV')) {
@@ -100,7 +153,7 @@ class Device {
         DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
         if (isAndroid) {
           AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-          final model = androidInfo.model.toUpperCase();
+          final model = androidInfo.model!.toUpperCase();
           if (model.contains('AFT')) {
             return TVDeviceType.FIRETV;
           } else if (model.contains('BOX')) {

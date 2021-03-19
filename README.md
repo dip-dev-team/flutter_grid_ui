@@ -9,7 +9,7 @@ To use this package, add `flutter_flexui` as a [dependency in your pubspec.yaml 
 
 ```yaml
 dependencies:
-  flutter_flexui: ^0.1.6
+  flutter_flexui: ^1.0.0
 ```
 
 ## Using
@@ -74,94 +74,94 @@ import 'package:flutter_flexui/flexui.dart';
   /// @ScreenSize.SM (for tablets - screens equal to or greater than 768px wide)
   /// @ScreenSize.MD (for small laptops - screens equal to or greater than 992px wide)
   /// @ScreenSize.LG (for laptops and desktops - screens equal to or greater than 1200px wide)
-  Screen.screenSize(context);
+  context.screenSize;
 ```
 
 ```dart
   /// Get MediaQueryData
-  Screen.mediaQuery(context);
+  context.mediaQuery;
 ```
 
 ```dart
-  Screen.size(context);
+  context.screenSize;
 ```
 
 ```dart
-  Screen.width(context);
+  context.screenWidth;
 ```
 
 ```dart
-  Screen.height(context);
+  context.screenHeight;
 ```
 
 ```dart
   /// Get pixel ratio of screen
-  Screen.pixelRatio(context);
+  context.pixelRatio;
 ```
 
 ```dart
   /// Screen diagonal
-  Screen.diagonal(context);
+  context.diagonal;
 ```
 
 ```dart
-  Screen.diagonalInches(context);
+  context.diagonalInches;
 ```
 
 ```dart
-  Screen.statusBarHeight(context);
+  context.statusBarHeight;
 ```
 
 ```dart
-  Screen.bottomBarHeight(context);
+  context.bottomBarHeight;
 ```
 
 ```dart
   // Get value by screen size
-  Screen.valueByScreen(context, xsObject, smObject, mdObject, lgObject);
+  context.valueByScreen(xsObject, smObject, mdObject, lgObject);
 ```
 
 #### Device
 
 ```dart
-   Device.isDesktop
+   context.isDesktop
 ```
 
 ```dart
-  Device.isMobile
+  context.isMobile
 ```
 
 ```dart
-  Device.isWeb
+  context.isWeb
 ```
 
 ```dart
-  Device.isWindows
+  context.isWindows
 ```
 
 ```dart
-  Device.isLinux
+  context.isLinux
 ```
 
 ```dart
-  Device.isMacOS
+  context.isMacOS
 ```
 
 ```dart
-  Device.isAndroid
+  context.isAndroid
 ```
 
 ```dart
-  Device.isFuchsia
+  context.isFuchsia
 ```
 
 ```dart
-  Device.isIOS
+  context.isIOS
 ```
 
 ```dart
   /// Get @DeviceType
-  Device.deviceType(context)
+  context.deviceType
 ```
 
 ## Authors

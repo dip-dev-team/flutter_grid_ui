@@ -1,4 +1,7 @@
+// Flutter imports:
 import 'package:flutter/widgets.dart';
+
+// Project imports:
 import 'package:flutter_flexui/utils/screen.dart';
 
 class FlexRow extends StatelessWidget with Screen {
@@ -11,7 +14,7 @@ class FlexRow extends StatelessWidget with Screen {
 
   /// Creates a row, which adapts according to screen size
   const FlexRow({
-    Key key,
+    Key? key,
     int colXS = 1,
     int colSm = 1,
     int colMd = 1,
@@ -87,13 +90,10 @@ class FlexRow extends StatelessWidget with Screen {
     switch (Screen.screenSize(context)) {
       case ScreenSize.LG:
         return colLg;
-        break;
       case ScreenSize.MD:
         return colMd;
-        break;
       case ScreenSize.SM:
         return colSm;
-        break;
       default:
         return colXS;
     }
