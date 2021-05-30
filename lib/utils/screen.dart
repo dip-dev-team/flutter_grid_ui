@@ -3,12 +3,10 @@ import 'dart:math';
 
 // Flutter imports:
 import 'package:flutter/widgets.dart';
-
-// Package imports:
-import 'package:universal_html/html.dart' as html;
-
 // Project imports:
 import 'package:flutter_flexui/utils/device.dart';
+// Package imports:
+import 'package:universal_html/html.dart' as html;
 
 /// Screen extension for context
 /// Like context.screenWidth()
@@ -94,16 +92,14 @@ class Screen {
       }
     }
 
-    final screenWidth = Screen.width(context);
-    final screenHeight = Screen.height(context);
-    final value = screenWidth > screenHeight ? screenWidth : screenHeight;
+    final longestSide = Screen.longestSide(context);
     final diagonalInches = Screen.diagonalInches(context);
 
-    if (diagonalInches >= 21.0 && value >= 1200.0) {
+    if (diagonalInches >= 21.0 && longestSide >= 1200.0) {
       return ScreenSize.LG;
-    } else if (diagonalInches >= 11.0 && value >= 992.0) {
+    } else if (diagonalInches >= 11.0 && longestSide >= 992.0) {
       return ScreenSize.MD;
-    } else if (diagonalInches >= 8.0 && value >= 768.0) {
+    } else if (diagonalInches >= 8.0 && longestSide >= 768.0) {
       return ScreenSize.SM;
     } else {
       return ScreenSize.XS;
@@ -122,6 +118,9 @@ class Screen {
 
   /// Height of Screen
   static double height(BuildContext context) => size(context).height;
+
+  /// Longest Side of Screen
+  static double longestSide(BuildContext context) => size(context).longestSide;
 
   /// Get pixel ratio of screen
   static double pixelRatio(BuildContext context) =>
