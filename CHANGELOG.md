@@ -1,5 +1,9 @@
 # Versions
 
+## [1.0.1] - May 30, 2021
+
+upgrade dependencies.
+
 ## [1.0.0] - Marth 19, 2021
 
 Adding Null safety and extentions.
