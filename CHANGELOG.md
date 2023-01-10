@@ -1,5 +1,9 @@
 # Versions
 
+## [1.1.0] - January 10, 2023
+
+upgrade dependencies.
+
 ## [1.0.1] - May 30, 2021
 
 upgrade dependencies.

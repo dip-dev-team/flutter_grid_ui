@@ -1,6 +1,5 @@
 // Flutter imports:
 import 'package:flutter/widgets.dart';
-
 // Project imports:
 import 'package:flutter_flexui/utils/screen.dart';
 

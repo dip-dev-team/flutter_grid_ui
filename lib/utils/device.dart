@@ -108,7 +108,7 @@ class Device {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       if (isAndroid) {
         AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-        final model = androidInfo.model!.toUpperCase();
+        final model = androidInfo.model.toUpperCase();
         if (model.contains('AFT') ||
             model.contains('BOX') ||
             model.contains('TV')) {
@@ -153,7 +153,7 @@ class Device {
         DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
         if (isAndroid) {
           AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
-          final model = androidInfo.model!.toUpperCase();
+          final model = androidInfo.model.toUpperCase();
           if (model.contains('AFT')) {
             return TVDeviceType.FIRETV;
           } else if (model.contains('BOX')) {

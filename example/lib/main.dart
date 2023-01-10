@@ -69,8 +69,8 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child:
-                  Text("FlexRow", style: Theme.of(context).textTheme.headline4),
+              child: Text("FlexRow",
+                  style: Theme.of(context).textTheme.headlineMedium),
             ),
             FlexRow(
               colLg: 6,

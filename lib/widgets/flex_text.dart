@@ -101,7 +101,7 @@ class FlexText extends Text with Screen {
           md: effectiveMdTextStyle,
           lg: effectiveLgTextStyle);
 
-      if (MediaQuery.boldTextOverride(context))
+      if (MediaQuery.boldTextOf(context))
         currentStyle =
             currentStyle!.merge(const TextStyle(fontWeight: FontWeight.bold));
       Widget result = RichText(
