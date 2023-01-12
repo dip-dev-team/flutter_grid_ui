@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_flexui/flexui.dart';
 
-void main() => runApp(MyApp());
+void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -11,17 +13,17 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key, required this.title}) : super(key: key);
   final String title;
 
   @override
-  _MyHomePageState createState() => _MyHomePageState();
+  State createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
@@ -46,7 +48,7 @@ class _MyHomePageState extends State<MyHomePage> {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 children: <Widget>[
-                  FlexText(
+                  const FlexText(
                     'You have pushed the button this many times:',
                     styleSm:
                         TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
@@ -57,12 +59,12 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   FlexText(
                     '$_counter',
-                    styleSm:
-                        TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
-                    styleMd:
-                        TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
-                    styleLg:
-                        TextStyle(fontWeight: FontWeight.w900, fontSize: 22),
+                    styleSm: const TextStyle(
+                        fontWeight: FontWeight.w200, fontSize: 12),
+                    styleMd: const TextStyle(
+                        fontWeight: FontWeight.w600, fontSize: 16),
+                    styleLg: const TextStyle(
+                        fontWeight: FontWeight.w900, fontSize: 22),
                   ),
                 ],
               ),
@@ -102,7 +104,7 @@ class _MyHomePageState extends State<MyHomePage> {
       floatingActionButton: FloatingActionButton(
         onPressed: _incrementCounter,
         tooltip: 'Increment',
-        child: Icon(Icons.add),
+        child: const Icon(Icons.add),
       ),
     );
   }
