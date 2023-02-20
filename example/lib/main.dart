@@ -1,14 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_grid_ui/flutter_grid_ui.dart';
+import 'package:flutter_grid_ui_example/grid_example.dart';
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final _grid = Grid<int>();
-
-  MyApp({super.key});
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -17,16 +15,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: GridWidget(
-        grid: _grid,
-        builder: (context, data) {
-          return Container(
-            padding: const EdgeInsets.all(8),
-            width: 200.0,
-            height: 100.0,
-          );
-        },
-      ),
+      home: const GridExample(),
     );
   }
 }

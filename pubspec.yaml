@@ -10,7 +10,8 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  dart_grid: ^1.0.0+2
+  dart_grid: #^1.0.0+2
+    path: ../dart_grid
   
 dev_dependencies:
   flutter_test:
