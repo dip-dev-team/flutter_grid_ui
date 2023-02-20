@@ -1,6 +1,6 @@
 {
-    "name": "flutter_grid_example",
-    "short_name": "flutter_grid_example",
+    "name": "flutter_grid_ui_example",
+    "short_name": "flutter_grid_ui_example",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

@@ -1,4 +1,4 @@
-package com.example.flutter_grid_example
+package com.example.flutter_grid_ui_example
 
 import io.flutter.embedding.android.FlutterActivity
 

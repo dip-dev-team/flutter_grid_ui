@@ -1,7 +1,7 @@
-name: flutter_grid
+name: flutter_grid_ui
 description: Flutter Grid UI implementation with `dart_grid`. This package allows you to work with data tables like Excel, while saving only real data (empty data is only generated).
-version: 1.0.0
-homepage:
+version: 1.0.0-experimental
+repository: https://gitlab.com/dipdev.studio/open-source/flutter-grid
 
 environment:
   sdk: '>=2.19.2 <3.0.0'

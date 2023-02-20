@@ -1,4 +1,4 @@
-name: flutter_grid_example
+name: flutter_grid_ui_example
 description: Flutter Grid UI Example implementation with `dart_grid`. This package allows you to work with data tables like Excel, while saving only real data (empty data is only generated).
 publish_to: 'none'
 version: 1.0.0+1
@@ -9,7 +9,7 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
-  flutter_grid:
+  flutter_grid_ui:
     path: ../
   cupertino_icons: ^1.0.2
 

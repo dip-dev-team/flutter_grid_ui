@@ -1,4 +1,4 @@
-# flutter_grid_example
+# flutter_grid_ui_example
 
 A new Flutter project.
 
