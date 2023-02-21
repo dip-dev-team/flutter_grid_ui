@@ -19,3 +19,7 @@ dependencies:
 ```dart
 import 'package:flutter_grid_ui/flutter_grid_ui.dart';
 ```
+
+## Example
+
+![Example](assets/example.gif)
