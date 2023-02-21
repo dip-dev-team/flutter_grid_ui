@@ -5,23 +5,29 @@ import 'package:flutter/material.dart';
 
 export 'package:dart_grid/dart_grid.dart';
 
-typedef ItemBuilder<T> = Widget Function(BuildContext context, T? data);
-typedef EmptyBuilder = Widget Function(BuildContext context);
+/// Widget builder callback with data
+typedef ItemBuilder<T> = Widget Function(
+    BuildContext context, T? data, int rowIndex, int cellIndex);
 
-/// A [GridWidget].
+/// Widget builder callback
+typedef EmptyBuilder = Widget Function(
+    BuildContext context, int rowIndex, int cellIndex);
+
+/// A [GridWidget] - UI implementation for [dart_grid].
 class GridWidget<T> extends StatefulWidget {
   final Grid<T> grid;
-  //final ValueChanged<Grid<T>>? onChanged;
   final ItemBuilder<T> itemBuilder;
   final EmptyBuilder emptyBuilder;
+  final EmptyBuilder? outerBuilder;
   final ScrollController? verticalController;
   final ScrollController? horisontalController;
 
   const GridWidget(
       {super.key,
       required this.grid,
-      /* this.onChanged, */ required this.itemBuilder,
+      required this.itemBuilder,
       required this.emptyBuilder,
+      this.outerBuilder,
       this.verticalController,
       this.horisontalController});
 
@@ -57,25 +63,76 @@ class _GridWidgetState<T> extends State<GridWidget<T>> {
           scrollDirection: Axis.horizontal,
           child: SingleChildScrollView(
               controller: widget.verticalController,
-              child: _grid.isNotEmpty
-                  ? Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
-                      mainAxisSize: MainAxisSize.min,
-                      children: List<Widget>.generate(
-                          _grid.lengthRows,
-                          (indexRow) => Row(
+              child: AnimatedContainer(
+                duration: const Duration(microseconds: 400),
+                child: _grid.isNotEmpty
+                    ? Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          if (widget.outerBuilder != null)
+                            Row(
                                 mainAxisSize: MainAxisSize.min,
-                                children: List.generate(
-                                    _grid.lengthCells,
-                                    (indexCell) => widget.itemBuilder.call(
-                                        context,
-                                        _grid
-                                            .row(indexRow)
-                                            .cell(indexCell)
-                                            ?.data)),
-                              )),
-                    )
-                  : widget.emptyBuilder(context))),
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: List<Widget>.generate(
+                                    _grid.lengthCells + 2,
+                                    (cellIndex) => _grid.hasData(
+                                            0, cellIndex - 1)
+                                        ? widget.emptyBuilder
+                                            .call(context, -1, cellIndex - 1)
+                                        : widget.outerBuilder!
+                                            .call(context, -1, cellIndex - 1))),
+                          ...List<Widget>.generate(
+                              _grid.lengthRows,
+                              (rowIndex) => Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    children: [
+                                      if (widget.outerBuilder != null)
+                                        _grid.hasData(rowIndex, 0)
+                                            ? widget.emptyBuilder
+                                                .call(context, rowIndex, -1)
+                                            : widget.outerBuilder!
+                                                .call(context, rowIndex, -1),
+                                      ...List<Widget>.generate(
+                                          _grid.lengthCells,
+                                          (cellIndex) =>
+                                              _grid.hasData(rowIndex, cellIndex)
+                                                  ? widget.itemBuilder.call(
+                                                      context,
+                                                      _grid
+                                                          .row(rowIndex)
+                                                          ?.cell(cellIndex)
+                                                          ?.data,
+                                                      rowIndex,
+                                                      cellIndex)
+                                                  : widget.emptyBuilder.call(
+                                                      context,
+                                                      rowIndex,
+                                                      cellIndex)),
+                                      _grid.hasData(
+                                              rowIndex, _grid.lengthCells - 1)
+                                          ? widget.emptyBuilder.call(context,
+                                              rowIndex, _grid.lengthCells)
+                                          : widget.outerBuilder!.call(context,
+                                              rowIndex, _grid.lengthCells),
+                                    ],
+                                  )),
+                          if (widget.outerBuilder != null)
+                            Row(
+                                mainAxisSize: MainAxisSize.min,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: List<Widget>.generate(
+                                    _grid.lengthCells + 2,
+                                    (cellIndex) => _grid.hasData(
+                                            _grid.lengthRows - 1, cellIndex - 1)
+                                        ? widget.emptyBuilder.call(context,
+                                            _grid.lengthRows, cellIndex - 1)
+                                        : widget.outerBuilder!.call(context,
+                                            _grid.lengthRows, cellIndex - 1))),
+                        ],
+                      )
+                    : widget.emptyBuilder.call(context, 0, 0),
+              ))),
     );
   }
 }
