@@ -22,4 +22,4 @@ import 'package:flutter_grid_ui/flutter_grid_ui.dart';
 
 ## Example
 
-![Example](assets/example.gif)
+![Example](https://gitlab.com/dipdev.studio/open-source/flutter-grid/-/raw/main/assets/example.gif)
