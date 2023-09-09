@@ -94,43 +94,41 @@ class FlexText extends Text with Screen {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       DefaultTextStyle defaultTextStyle = DefaultTextStyle.of(context);
-      TextStyle? effectiveTextStyle = style;
-      TextStyle? effectiveXSTextStyle = styleXs;
+      TextStyle effectiveTextStyle = style ?? defaultTextStyle.style;
+      TextStyle? effectiveXsTextStyle = styleXs;
       TextStyle? effectiveSmTextStyle = styleSm;
       TextStyle? effectiveMdTextStyle = styleMd;
       TextStyle? effectiveLgTextStyle = styleLg;
 
-      if (style == null || style!.inherit) {
-        effectiveTextStyle = defaultTextStyle.style;
+      if (styleXs?.inherit ?? false) {
+        effectiveXsTextStyle = effectiveTextStyle.merge(styleXs);
       }
 
-      if (styleXs == null || styleXs!.inherit) {
-        effectiveXSTextStyle = effectiveTextStyle?.merge(styleXs);
+      if (styleSm?.inherit ?? false) {
+        effectiveSmTextStyle = effectiveXsTextStyle?.merge(styleSm);
       }
 
-      if (styleSm == null || styleSm!.inherit) {
-        effectiveSmTextStyle = effectiveXSTextStyle?.merge(styleSm);
-      }
-
-      if (styleMd == null || styleMd!.inherit) {
+      if (styleMd?.inherit ?? false) {
         effectiveMdTextStyle = effectiveSmTextStyle?.merge(styleMd);
       }
 
-      if (styleLg == null || styleLg!.inherit) {
+      if (styleLg?.inherit ?? false) {
         effectiveLgTextStyle = effectiveMdTextStyle?.merge(styleLg);
       }
 
       TextStyle? currentStyle = Screen.valueByScreen(context,
-          xs: effectiveXSTextStyle,
+          main: effectiveTextStyle,
+          xs: effectiveXsTextStyle,
           sm: effectiveSmTextStyle,
           md: effectiveMdTextStyle,
           lg: effectiveLgTextStyle);
 
       if (MediaQuery.boldTextOf(context)) {
         currentStyle =
-            currentStyle!.merge(const TextStyle(fontWeight: FontWeight.bold));
+            currentStyle?.merge(const TextStyle(fontWeight: FontWeight.bold));
       }
-      Widget result = RichText(
+
+      return RichText(
         textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
         textDirection: textDirection,
         locale: locale,
@@ -143,21 +141,12 @@ class FlexText extends Text with Screen {
         textWidthBasis: textWidthBasis ?? defaultTextStyle.textWidthBasis,
         text: TextSpan(
           style: currentStyle,
+          semanticsLabel: semanticsLabel,
           text: text,
           children: (textSpan != null ? <InlineSpan?>[textSpan] : null)
               as List<InlineSpan>?,
         ),
       );
-      if (semanticsLabel != null) {
-        result = Semantics(
-          textDirection: textDirection,
-          label: semanticsLabel,
-          child: ExcludeSemantics(
-            child: result,
-          ),
-        );
-      }
-      return result;
     });
   }
 }
