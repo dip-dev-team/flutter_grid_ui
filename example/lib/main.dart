@@ -50,6 +50,8 @@ class _MyHomePageState extends State<MyHomePage> {
                 children: <Widget>[
                   const FlexText(
                     'You have pushed the button this many times:',
+                    styleXs:
+                        TextStyle(fontWeight: FontWeight.w100, fontSize: 10),
                     styleSm:
                         TextStyle(fontWeight: FontWeight.w200, fontSize: 12),
                     styleMd:
@@ -59,6 +61,8 @@ class _MyHomePageState extends State<MyHomePage> {
                   ),
                   FlexText(
                     '$_counter',
+                    styleXs: const TextStyle(
+                        fontWeight: FontWeight.w100, fontSize: 10),
                     styleSm: const TextStyle(
                         fontWeight: FontWeight.w200, fontSize: 12),
                     styleMd: const TextStyle(
@@ -93,11 +97,44 @@ class _MyHomePageState extends State<MyHomePage> {
                 Text(
                   "Screen: ${context.screenSize.toString()}",
                 ),
-                Text(
-                  "Device: ${context.deviceType.toString()}",
-                ),
+                FutureBuilder<DeviceType>(
+                    future: context.deviceType,
+                    builder: (context, snapshot) {
+                      return Text(
+                        "Device: ${snapshot.data?.toString()}",
+                      );
+                    }),
               ],
             ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Text("FlexWidget",
+                  style: Theme.of(context).textTheme.headlineMedium),
+            ),
+            Center(
+              child: FlexWidget(
+                xs: Container(
+                  color: Colors.green,
+                  width: 200.0,
+                  height: 200.0,
+                ),
+                sm: Container(
+                  color: Colors.orange,
+                  width: 200.0,
+                  height: 200.0,
+                ),
+                md: Container(
+                  color: Colors.red,
+                  width: 200.0,
+                  height: 200.0,
+                ),
+                lg: Container(
+                  color: Colors.purple,
+                  width: 200.0,
+                  height: 200.0,
+                ),
+              ),
+            )
           ],
         ),
       ),

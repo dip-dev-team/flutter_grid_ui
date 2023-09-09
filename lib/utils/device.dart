@@ -1,14 +1,11 @@
-// Flutter imports:
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 
-// Package imports:
 import 'package:device_info_plus/device_info_plus.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:universal_io/io.dart';
 
-// Project imports:
-import 'package:flutter_flexui/utils/screen.dart';
+import 'screen.dart';
 
 /// Device extension for context
 /// Like context.isDesktop
@@ -45,16 +42,16 @@ extension DeviceExtension on BuildContext {
   /// @DeviceType.TABLET
   /// @DeviceType.LAPTOP
   /// @DeviceType.TV
-  /// @DeviceType.UNKNOWN
+  /// @TVDeviceType.unknown
   Future<DeviceType> get deviceType => Device.deviceType(this);
 
   /// Get @TVDeviceType
-  /// @TVDeviceType.TIZEN
-  /// @TVDeviceType.WEBOS
-  /// @TVDeviceType.ANDROIDTV
-  /// @TVDeviceType.FIRETV
-  /// @TVDeviceType.MITV
-  /// @DeviceType.UNKNOWN
+  /// @TVDeviceType.tizen
+  /// @TVDeviceType.webos
+  /// @TVDeviceType.androidtv
+  /// @TVDeviceType.firetv
+  /// @TVDeviceType.mitv
+  /// @TVDeviceType.unknown
   Future<TVDeviceType> get tvDeviceType => Device.tvDeviceType(this);
 }
 
@@ -71,7 +68,7 @@ class Device {
   static bool get isIOS => Platform.isIOS;
 
   static Future<bool> isMobile(BuildContext context) async {
-    return await deviceType(context) == DeviceType.MOBILE;
+    return await deviceType(context) == DeviceType.mobile;
   }
 
   /// Get @DeviceType
@@ -79,7 +76,7 @@ class Device {
   /// @DeviceType.TABLET
   /// @DeviceType.LAPTOP
   /// @DeviceType.TV
-  /// @DeviceType.UNKNOWN
+  /// @TVDeviceType.unknown
   static Future<DeviceType> deviceType(BuildContext context) async {
     final screenSize = Screen.screenSize(context);
     if (isWeb) {
@@ -88,22 +85,22 @@ class Device {
           appVersion.contains('WEBOS') ||
           appVersion.contains('BOX') ||
           appVersion.contains('TV')) {
-        return DeviceType.TV;
+        return DeviceType.tv;
       } else if (isWindows || isLinux || isMacOS) {
-        return DeviceType.LAPTOP;
-      } else if (screenSize == ScreenSize.XS) {
-        return DeviceType.MOBILE;
-      } else if (screenSize == ScreenSize.SM) {
-        return DeviceType.TABLET;
-      } else if (screenSize == ScreenSize.MD) {
-        return DeviceType.LAPTOP;
-      } else if (screenSize == ScreenSize.LG) {
-        return DeviceType.TV;
+        return DeviceType.laptop;
+      } else if (screenSize == ScreenSize.xs) {
+        return DeviceType.mobile;
+      } else if (screenSize == ScreenSize.sm) {
+        return DeviceType.tablet;
+      } else if (screenSize == ScreenSize.md) {
+        return DeviceType.laptop;
+      } else if (screenSize == ScreenSize.lg) {
+        return DeviceType.tv;
       } else {
-        return DeviceType.UNKNOWN;
+        return DeviceType.unknown;
       }
     } else if (isDesktop) {
-      return DeviceType.LAPTOP;
+      return DeviceType.laptop;
     } else if (isAndroid || isIOS) {
       DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
       if (isAndroid) {
@@ -112,42 +109,42 @@ class Device {
         if (model.contains('AFT') ||
             model.contains('BOX') ||
             model.contains('TV')) {
-          return DeviceType.TV;
+          return DeviceType.tv;
         }
       } else if (isIOS) {
         IosDeviceInfo iosInfo = await deviceInfo.iosInfo;
         debugPrint(iosInfo.toString());
       }
-      if (screenSize == ScreenSize.XS) {
-        return DeviceType.MOBILE;
-      } else if (screenSize == ScreenSize.SM) {
-        return DeviceType.TABLET;
-      } else if (screenSize == ScreenSize.MD || screenSize == ScreenSize.LG) {
-        return DeviceType.TV;
+      if (screenSize == ScreenSize.xs) {
+        return DeviceType.mobile;
+      } else if (screenSize == ScreenSize.sm) {
+        return DeviceType.tablet;
+      } else if (screenSize == ScreenSize.md || screenSize == ScreenSize.lg) {
+        return DeviceType.tv;
       } else {
-        return DeviceType.UNKNOWN;
+        return DeviceType.unknown;
       }
     } else {
-      return DeviceType.UNKNOWN;
+      return DeviceType.unknown;
     }
   }
 
   /// Get @TVDeviceType
-  /// @TVDeviceType.TIZEN
-  /// @TVDeviceType.WEBOS
-  /// @TVDeviceType.ANDROIDTV
-  /// @TVDeviceType.FIRETV
-  /// @TVDeviceType.MITV
-  /// @DeviceType.UNKNOWN
+  /// @TVDeviceType.tizen
+  /// @TVDeviceType.webos
+  /// @TVDeviceType.androidtv
+  /// @TVDeviceType.firetv
+  /// @TVDeviceType.mitv
+  /// @TVDeviceType.unknown
   static Future<TVDeviceType> tvDeviceType(BuildContext context) async {
     final deviceType = await Device.deviceType(context);
-    if (deviceType == DeviceType.TV) {
+    if (deviceType == DeviceType.tv) {
       if (isWeb) {
         final appVersion = html.window.navigator.appVersion.toUpperCase();
         if (appVersion.contains('TIZEN')) {
-          return TVDeviceType.TIZEN;
+          return TVDeviceType.tizen;
         } else if (appVersion.contains('WEBOS')) {
-          return TVDeviceType.WEBOS;
+          return TVDeviceType.webos;
         }
       } else if (isAndroid) {
         DeviceInfoPlugin deviceInfo = DeviceInfoPlugin();
@@ -155,34 +152,34 @@ class Device {
           AndroidDeviceInfo androidInfo = await deviceInfo.androidInfo;
           final model = androidInfo.model.toUpperCase();
           if (model.contains('AFT')) {
-            return TVDeviceType.FIRETV;
+            return TVDeviceType.firetv;
           } else if (model.contains('BOX')) {
-            return TVDeviceType.MITV;
+            return TVDeviceType.mitv;
           } else if (model.contains('TV')) {
-            return TVDeviceType.ANDROIDTV;
+            return TVDeviceType.androidtv;
           }
         }
       }
     }
-    return TVDeviceType.UNKNOWN;
+    return TVDeviceType.unknown;
   }
 }
 
 /// @DeviceType
 enum DeviceType {
-  MOBILE,
-  TABLET,
-  LAPTOP,
-  TV,
-  UNKNOWN,
+  mobile,
+  tablet,
+  laptop,
+  tv,
+  unknown,
 }
 
 /// @TVDeviceType
 enum TVDeviceType {
-  TIZEN,
-  WEBOS,
-  ANDROIDTV,
-  FIRETV,
-  MITV,
-  UNKNOWN,
+  tizen,
+  webos,
+  androidtv,
+  firetv,
+  mitv,
+  unknown,
 }

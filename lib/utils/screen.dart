@@ -1,21 +1,18 @@
-// Dart imports:
 import 'dart:math';
 
-// Flutter imports:
 import 'package:flutter/widgets.dart';
-// Project imports:
-import 'package:flutter_flexui/utils/device.dart';
-// Package imports:
 import 'package:universal_html/html.dart' as html;
+
+import 'device.dart';
 
 /// Screen extension for context
 /// Like context.screenWidth()
 extension ScreenExtension on BuildContext {
   /// Get screen size
-  /// @ScreenSize.XS (for phones - screens less than 768px wide)
-  /// @ScreenSize.SM (for tablets - screens equal to or greater than 768px wide)
-  /// @ScreenSize.MD (for small laptops - screens equal to or greater than 992px wide)
-  /// @ScreenSize.LG (for laptops and desktops and TV - biggers screens)
+  /// @ScreenSize.xs (for phones - screens less than 768px wide)
+  /// @ScreenSize.sm (for tablets - screens equal to or greater than 768px wide)
+  /// @ScreenSize.md (for small laptops - screens equal to or greater than 992px wide)
+  /// @ScreenSize.lg (for laptops and desktops and TV - biggers screens)
   ScreenSize get screenSize => Screen.screenSize(this);
 
   /// Get MediaQueryData
@@ -68,7 +65,7 @@ extension ScreenExtension on BuildContext {
 ///// Android TV 1080p - 55` 1920x1080 (960x540, 2.0)
 ///// Android TV 720p - 55` 1280x720 (961.50x540.84, 1.331)
 ///// Fire Stick
-class Screen {
+mixin class Screen {
   /// Approximate Pixel Density
   static double get _ppi => Device.isWeb
       ? 150
@@ -77,10 +74,10 @@ class Screen {
           : 96;
 
   /// Get screen size
-  /// @ScreenSize.XS (for phones - screens less than 768px wide)
-  /// @ScreenSize.SM (for tablets - screens equal to or greater than 768px wide)
-  /// @ScreenSize.MD (for small laptops - screens equal to or greater than 992px wide)
-  /// @ScreenSize.LG (for laptops and desktops and TV - biggers screens)
+  /// @ScreenSize.xs (for phones - screens less than 768px wide)
+  /// @ScreenSize.sm (for tablets - screens equal to or greater than 768px wide)
+  /// @ScreenSize.md (for small laptops - screens equal to or greater than 992px wide)
+  /// @ScreenSize.lg (for laptops and desktops and TV - biggers screens)
   static ScreenSize screenSize(BuildContext context) {
     if (Device.isWeb) {
       final appVersion = html.window.navigator.appVersion.toUpperCase();
@@ -88,7 +85,7 @@ class Screen {
           appVersion.contains('WEBOS') ||
           appVersion.contains('BOX') ||
           appVersion.contains('TV')) {
-        return ScreenSize.LG;
+        return ScreenSize.lg;
       }
     }
 
@@ -96,13 +93,13 @@ class Screen {
     final diagonalInches = Screen.diagonalInches(context);
 
     if (diagonalInches >= 21.0 && longestSide >= 1200.0) {
-      return ScreenSize.LG;
+      return ScreenSize.lg;
     } else if (diagonalInches >= 11.0 && longestSide >= 992.0) {
-      return ScreenSize.MD;
+      return ScreenSize.md;
     } else if (diagonalInches >= 8.0 && longestSide >= 768.0) {
-      return ScreenSize.SM;
+      return ScreenSize.sm;
     } else {
-      return ScreenSize.XS;
+      return ScreenSize.xs;
     }
   }
 
@@ -153,50 +150,26 @@ class Screen {
     T? lg,
   }) {
     switch (screenSize(context)) {
-      case ScreenSize.LG:
-        return lg != null
-            ? lg
-            : md != null
-                ? md
-                : sm != null
-                    ? sm
-                    : xs;
-      case ScreenSize.MD:
-        return md != null
-            ? md
-            : sm != null
-                ? sm
-                : xs != null
-                    ? xs
-                    : lg;
-      case ScreenSize.SM:
-        return sm != null
-            ? sm
-            : xs != null
-                ? xs
-                : md != null
-                    ? md
-                    : lg;
+      case ScreenSize.lg:
+        return lg ?? md ?? sm ?? xs;
+      case ScreenSize.md:
+        return md ?? sm ?? xs ?? lg;
+      case ScreenSize.sm:
+        return sm ?? xs ?? md ?? lg;
       default:
-        return xs != null
-            ? xs
-            : sm != null
-                ? sm
-                : md != null
-                    ? md
-                    : lg;
+        return xs ?? sm ?? md ?? lg;
     }
   }
 }
 
 /// @ScreenSize
-/// @ScreenSize.XS - for phones
-/// @ScreenSize.SM  - tablets
-/// @ScreenSize.MD  - for small laptops
-/// @ScreenSize.LG  - for laptops and desktops and TV
+/// @ScreenSize.xs - for phones
+/// @ScreenSize.sm  - tablets
+/// @ScreenSize.md  - for small laptops
+/// @ScreenSize.lg  - for laptops and desktops and TV
 enum ScreenSize {
-  XS,
-  SM,
-  MD,
-  LG,
+  xs,
+  sm,
+  md,
+  lg,
 }

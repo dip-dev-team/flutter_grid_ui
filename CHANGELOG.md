@@ -1,5 +1,10 @@
 # Versions
 
+## [1.2.0] - September 9, 2023
+
+upgrade dependencies.
+up dart and flutter version
+
 ## [1.1.1] - January 12, 2023
 
 upgrade dependencies.

@@ -1,73 +1,93 @@
-// Flutter imports:
+import 'dart:ui' as ui show TextHeightBehavior;
+
 import 'package:flutter/widgets.dart';
 
-// Project imports:
-import 'package:flutter_flexui/utils/screen.dart';
+import '../utils/screen.dart';
 
 class FlexText extends Text with Screen {
   /// Creates a Text widget, which adapts text style according to screen size
   const FlexText(
     String this.text, {
     Key? key,
-    this.style,
-    this.strutStyle,
-    this.textAlign,
-    this.textDirection,
-    this.locale,
-    this.softWrap,
-    this.overflow,
-    this.textScaleFactor,
-    this.maxLines,
-    this.semanticsLabel,
-    this.textWidthBasis,
-    this.styleXS,
+    TextStyle? style,
+    StrutStyle? strutStyle,
+    TextAlign? textAlign,
+    TextDirection? textDirection,
+    Locale? locale,
+    bool? softWrap,
+    TextOverflow? overflow,
+    double? textScaleFactor,
+    int? maxLines,
+    String? semanticsLabel,
+    TextWidthBasis? textWidthBasis,
+    ui.TextHeightBehavior? textHeightBehavior,
+    Color? selectionColor,
+    this.styleXs,
     this.styleSm,
     this.styleMd,
     this.styleLg,
-  })  : textSpan = null,
-        super(text, key: key);
+  }) : super(
+          text,
+          key: key,
+          style: style,
+          strutStyle: strutStyle,
+          textAlign: textAlign,
+          textDirection: textDirection,
+          locale: locale,
+          softWrap: softWrap,
+          overflow: overflow,
+          textScaleFactor: textScaleFactor,
+          maxLines: maxLines,
+          semanticsLabel: semanticsLabel,
+          textWidthBasis: textWidthBasis,
+          textHeightBehavior: textHeightBehavior,
+          selectionColor: selectionColor,
+        );
 
   const FlexText.rich(
-    InlineSpan this.textSpan, {
+    InlineSpan textSpan, {
     Key? key,
-    this.style,
-    this.strutStyle,
-    this.textAlign,
-    this.textDirection,
-    this.locale,
-    this.softWrap,
-    this.overflow,
-    this.textScaleFactor,
-    this.maxLines,
-    this.semanticsLabel,
-    this.textWidthBasis,
-    this.styleXS,
+    TextStyle? style,
+    StrutStyle? strutStyle,
+    TextAlign? textAlign,
+    TextDirection? textDirection,
+    Locale? locale,
+    bool? softWrap,
+    TextOverflow? overflow,
+    double? textScaleFactor,
+    int? maxLines,
+    String? semanticsLabel,
+    TextWidthBasis? textWidthBasis,
+    ui.TextHeightBehavior? textHeightBehavior,
+    Color? selectionColor,
+    this.styleXs,
     this.styleSm,
     this.styleMd,
     this.styleLg,
   })  : text = null,
-        super.rich(textSpan, key: key);
+        super.rich(
+          textSpan,
+          key: key,
+          style: style,
+          strutStyle: strutStyle,
+          textAlign: textAlign,
+          textDirection: textDirection,
+          locale: locale,
+          softWrap: softWrap,
+          overflow: overflow,
+          textScaleFactor: textScaleFactor,
+          maxLines: maxLines,
+          semanticsLabel: semanticsLabel,
+          textWidthBasis: textWidthBasis,
+          textHeightBehavior: textHeightBehavior,
+          selectionColor: selectionColor,
+        );
 
   final String? text;
-  final InlineSpan? textSpan;
-
-  final TextStyle? style;
-
-  final TextStyle? styleXS;
+  final TextStyle? styleXs;
   final TextStyle? styleSm;
   final TextStyle? styleMd;
   final TextStyle? styleLg;
-
-  final StrutStyle? strutStyle;
-  final TextAlign? textAlign;
-  final TextDirection? textDirection;
-  final Locale? locale;
-  final bool? softWrap;
-  final TextOverflow? overflow;
-  final double? textScaleFactor;
-  final int? maxLines;
-  final String? semanticsLabel;
-  final TextWidthBasis? textWidthBasis;
 
   @override
   Widget build(BuildContext context) {
@@ -75,25 +95,30 @@ class FlexText extends Text with Screen {
         builder: (BuildContext context, BoxConstraints constraints) {
       DefaultTextStyle defaultTextStyle = DefaultTextStyle.of(context);
       TextStyle? effectiveTextStyle = style;
-      TextStyle? effectiveXSTextStyle = styleXS;
+      TextStyle? effectiveXSTextStyle = styleXs;
       TextStyle? effectiveSmTextStyle = styleSm;
       TextStyle? effectiveMdTextStyle = styleMd;
       TextStyle? effectiveLgTextStyle = styleLg;
 
-      if (style == null || style!.inherit)
-        effectiveTextStyle = defaultTextStyle.style.merge(style);
+      if (style == null || style!.inherit) {
+        effectiveTextStyle = defaultTextStyle.style;
+      }
 
-      if (styleXS == null || styleXS!.inherit)
-        effectiveXSTextStyle = effectiveTextStyle?.merge(styleXS);
+      if (styleXs == null || styleXs!.inherit) {
+        effectiveXSTextStyle = effectiveTextStyle?.merge(styleXs);
+      }
 
-      if (styleSm == null || styleSm!.inherit)
+      if (styleSm == null || styleSm!.inherit) {
         effectiveSmTextStyle = effectiveXSTextStyle?.merge(styleSm);
+      }
 
-      if (styleMd == null || styleMd!.inherit)
+      if (styleMd == null || styleMd!.inherit) {
         effectiveMdTextStyle = effectiveSmTextStyle?.merge(styleMd);
+      }
 
-      if (styleLg == null || styleLg!.inherit)
+      if (styleLg == null || styleLg!.inherit) {
         effectiveLgTextStyle = effectiveMdTextStyle?.merge(styleLg);
+      }
 
       TextStyle? currentStyle = Screen.valueByScreen(context,
           xs: effectiveXSTextStyle,
@@ -101,9 +126,10 @@ class FlexText extends Text with Screen {
           md: effectiveMdTextStyle,
           lg: effectiveLgTextStyle);
 
-      if (MediaQuery.boldTextOverride(context))
+      if (MediaQuery.boldTextOf(context)) {
         currentStyle =
             currentStyle!.merge(const TextStyle(fontWeight: FontWeight.bold));
+      }
       Widget result = RichText(
         textAlign: textAlign ?? defaultTextStyle.textAlign ?? TextAlign.start,
         textDirection: textDirection,

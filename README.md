@@ -9,7 +9,7 @@ To use this package, add `flutter_flexui` as a [dependency in your pubspec.yaml 
 
 ```yaml
 dependencies:
-  flutter_flexui: ^1.1.1
+  flutter_flexui: ^1.2.0
 ```
 
 ## Using
@@ -70,10 +70,10 @@ import 'package:flutter_flexui/flexui.dart';
 
 ```dart
   /// Return @ScreenSize
-  /// @ScreenSize.XS (for phones - screens less than 768px wide)
-  /// @ScreenSize.SM (for tablets - screens equal to or greater than 768px wide)
-  /// @ScreenSize.MD (for small laptops - screens equal to or greater than 992px wide)
-  /// @ScreenSize.LG (for laptops and desktops - screens equal to or greater than 1200px wide)
+  /// @ScreenSize.xs (for phones - screens less than 768px wide)
+  /// @ScreenSize.sm (for tablets - screens equal to or greater than 768px wide)
+  /// @ScreenSize.md (for small laptops - screens equal to or greater than 992px wide)
+  /// @ScreenSize.lg (for laptops and desktops - screens equal to or greater than 1200px wide)
   context.screenSize;
 ```
 

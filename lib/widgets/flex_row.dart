@@ -1,8 +1,6 @@
-// Flutter imports:
 import 'package:flutter/widgets.dart';
 
-// Project imports:
-import 'package:flutter_flexui/utils/screen.dart';
+import '../utils/screen.dart';
 
 class FlexRow extends StatelessWidget with Screen {
   final List<Widget> children;
@@ -15,29 +13,18 @@ class FlexRow extends StatelessWidget with Screen {
   /// Creates a row, which adapts according to screen size
   const FlexRow({
     Key? key,
-    int colXS = 1,
-    int colSm = 1,
-    int colMd = 1,
-    int colLg = 1,
-    MainAxisSize colMainAxisSize = MainAxisSize.max,
-    MainAxisSize rowMainAxisSize = MainAxisSize.max,
-    MainAxisAlignment colMainAxisAlignment = MainAxisAlignment.start,
-    MainAxisAlignment rowMainAxisAlignment = MainAxisAlignment.start,
-    VerticalDirection colVerticalDirection = VerticalDirection.down,
-    VerticalDirection rowVerticalDirection = VerticalDirection.down,
-    List<Widget> children = const <Widget>[],
-  })  : this.children = children,
-        this.colXS = colXS,
-        this.colSm = colSm,
-        this.colMd = colMd,
-        this.colLg = colLg,
-        this.colMainAxisSize = colMainAxisSize,
-        this.rowMainAxisSize = rowMainAxisSize,
-        this.colMainAxisAlignment = colMainAxisAlignment,
-        this.rowMainAxisAlignment = rowMainAxisAlignment,
-        this.colVerticalDirection = colVerticalDirection,
-        this.rowVerticalDirection = rowVerticalDirection,
-        super(key: key);
+    this.colXS = 1,
+    this.colSm = 1,
+    this.colMd = 1,
+    this.colLg = 1,
+    this.colMainAxisSize = MainAxisSize.max,
+    this.rowMainAxisSize = MainAxisSize.max,
+    this.colMainAxisAlignment = MainAxisAlignment.start,
+    this.rowMainAxisAlignment = MainAxisAlignment.start,
+    this.colVerticalDirection = VerticalDirection.down,
+    this.rowVerticalDirection = VerticalDirection.down,
+    this.children = const <Widget>[],
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -47,14 +34,14 @@ class FlexRow extends StatelessWidget with Screen {
           colXS: colXS, colSm: colSm, colMd: colMd, colLg: colLg);
       List<Widget> columns = [];
       List<Widget> rows = [];
-      for (Widget child in this.children) {
+      for (Widget child in children) {
         if (rows.length >= maxColumns) {
           columns.add(_addColums(rows));
           rows.clear();
         }
         rows.add(child);
       }
-      if (rows.length > 0) {
+      if (rows.isNotEmpty) {
         columns.add(_addColums(rows));
         rows.clear();
       }
@@ -64,19 +51,19 @@ class FlexRow extends StatelessWidget with Screen {
 
   Widget _addColums(List<Widget> widgets) {
     return Row(
-      children: List.from(widgets),
       mainAxisSize: colMainAxisSize,
       mainAxisAlignment: colMainAxisAlignment,
       verticalDirection: colVerticalDirection,
+      children: List.from(widgets),
     );
   }
 
   Widget _addRows(List<Widget> widgets) {
     return Column(
-      children: List.from(widgets),
       mainAxisSize: rowMainAxisSize,
       mainAxisAlignment: rowMainAxisAlignment,
       verticalDirection: rowVerticalDirection,
+      children: List.from(widgets),
     );
   }
 
@@ -88,11 +75,11 @@ class FlexRow extends StatelessWidget with Screen {
     int colLg = 1,
   }) {
     switch (Screen.screenSize(context)) {
-      case ScreenSize.LG:
+      case ScreenSize.lg:
         return colLg;
-      case ScreenSize.MD:
+      case ScreenSize.md:
         return colMd;
-      case ScreenSize.SM:
+      case ScreenSize.sm:
         return colSm;
       default:
         return colXS;

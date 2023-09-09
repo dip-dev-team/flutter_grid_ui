@@ -1,6 +1,5 @@
 library flexui;
 
-// Project imports:
 import 'package:flutter_flexui/utils/screen.dart';
 
 export 'utils/device.dart';

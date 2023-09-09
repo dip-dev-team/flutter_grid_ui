@@ -1,7 +1,5 @@
-// Flutter imports:
 import 'package:flutter/widgets.dart';
-// Project imports:
-import 'package:flutter_flexui/utils/screen.dart';
+import '../utils/screen.dart';
 
 class FlexWidget extends StatelessWidget with Screen {
   final Widget? xs;
