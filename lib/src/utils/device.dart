@@ -1,73 +1,25 @@
+import 'package:device_info_plus/device_info_plus.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
-
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:universal_html/html.dart' as html;
 import 'package:universal_io/io.dart';
 
 import 'screen.dart';
 
-/// Device extension for context
-/// Like context.isDesktop
-extension DeviceExtension on BuildContext {
-  /// Get true if Web
-  bool get isWeb => Device.isWeb;
-
-  /// Get true if Windows
-  bool get isWindows => Device.isWindows;
-
-  /// Get true if Linux
-  bool get isLinux => Device.isLinux;
-
-  /// Get true if MacOS
-  bool get isMacOS => Device.isMacOS;
-
-  /// Get true if Android
-  bool get isAndroid => Device.isAndroid;
-
-  /// Get true if Fuchsia
-  bool get isFuchsia => Device.isFuchsia;
-
-  /// Get true if iOS
-  bool get isIOS => Device.isIOS;
-
-  /// Get true if Desktop
-  bool get isDesktop => Device.isDesktop;
-
-  /// Get true if isTablet
-  Future<bool> get isTablet => Device.isTablet(this);
-
-  /// Get true if Mobile
-  Future<bool> get isMobile => Device.isMobile(this);
-
-  /// Get @DeviceType
-  /// @DeviceType.MOBILE
-  /// @DeviceType.TABLET
-  /// @DeviceType.LAPTOP
-  /// @DeviceType.TV
-  /// @TVDeviceType.unknown
-  Future<DeviceType> get deviceType => Device.deviceType(this);
-
-  /// Get @TVDeviceType
-  /// @TVDeviceType.tizen
-  /// @TVDeviceType.webos
-  /// @TVDeviceType.androidtv
-  /// @TVDeviceType.firetv
-  /// @TVDeviceType.mitv
-  /// @TVDeviceType.unknown
-  Future<TVDeviceType> get tvDeviceType => Device.tvDeviceType(this);
-}
-
 // Device utils
-class Device {
+mixin class Device {
   static bool get isDesktop => !isWeb && (isWindows || isLinux || isMacOS);
 
-  static Future<bool> isMobile(BuildContext context) async {
-    return await deviceType(context) == DeviceType.mobile;
+  static Future<bool> isLaptop(BuildContext context) async {
+    return await deviceType(context) == DeviceType.laptop;
   }
 
   static Future<bool> isTablet(BuildContext context) async {
     return await deviceType(context) == DeviceType.tablet;
+  }
+
+  static Future<bool> isMobile(BuildContext context) async {
+    return await deviceType(context) == DeviceType.mobile;
   }
 
   static bool get isWeb => kIsWeb;

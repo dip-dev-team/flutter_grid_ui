@@ -2,6 +2,7 @@ import 'dart:math';
 
 import 'package:flutter/widgets.dart';
 
+import 'device.dart';
 import 'screen.dart';
 
 /// Screen extension for context
@@ -52,6 +53,60 @@ extension ScreenExtension on BuildContext {
     T? lg,
   }) =>
       Screen.valueByScreen<T>(this, xs: xs, sm: sm, md: md, lg: lg);
+}
+
+/// Device extension for context
+/// Like context.isDesktop
+extension DeviceExtension on BuildContext {
+  /// Get true if Web
+  bool get isWeb => Device.isWeb;
+
+  /// Get true if Windows
+  bool get isWindows => Device.isWindows;
+
+  /// Get true if Linux
+  bool get isLinux => Device.isLinux;
+
+  /// Get true if MacOS
+  bool get isMacOS => Device.isMacOS;
+
+  /// Get true if Android
+  bool get isAndroid => Device.isAndroid;
+
+  /// Get true if Fuchsia
+  bool get isFuchsia => Device.isFuchsia;
+
+  /// Get true if iOS
+  bool get isIOS => Device.isIOS;
+
+  /// Get true if Desktop
+  bool get isDesktop => Device.isDesktop;
+
+  /// Get true if Laptop
+  Future<bool> get isLaptop => Device.isLaptop(this);
+
+  /// Get true if isTablet
+  Future<bool> get isTablet => Device.isTablet(this);
+
+  /// Get true if Mobile
+  Future<bool> get isMobile => Device.isMobile(this);
+
+  /// Get @DeviceType
+  /// @DeviceType.MOBILE
+  /// @DeviceType.TABLET
+  /// @DeviceType.LAPTOP
+  /// @DeviceType.TV
+  /// @TVDeviceType.unknown
+  Future<DeviceType> get deviceType => Device.deviceType(this);
+
+  /// Get @TVDeviceType
+  /// @TVDeviceType.tizen
+  /// @TVDeviceType.webos
+  /// @TVDeviceType.androidtv
+  /// @TVDeviceType.firetv
+  /// @TVDeviceType.mitv
+  /// @TVDeviceType.unknown
+  Future<TVDeviceType> get tvDeviceType => Device.tvDeviceType(this);
 }
 
 extension NumExtension on num {
