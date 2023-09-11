@@ -1,5 +1,10 @@
 ## Versions:
 
+#### [1.3.0] - September 11, 2023
+
+- add new features and extensions.
+- refactoring.
+
 #### [1.2.1] - September 9, 2023
 
 - fix FlexText widget styles.

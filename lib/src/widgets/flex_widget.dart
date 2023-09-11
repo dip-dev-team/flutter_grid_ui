@@ -1,4 +1,5 @@
 import 'package:flutter/widgets.dart';
+
 import '../utils/screen.dart';
 
 class FlexWidget extends StatelessWidget with Screen {

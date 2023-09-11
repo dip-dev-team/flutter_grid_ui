@@ -4,7 +4,7 @@ import '../utils/screen.dart';
 
 class FlexRow extends StatelessWidget with Screen {
   final List<Widget> children;
-  final int colXS, colSm, colMd, colLg;
+  final int colXs, colSm, colMd, colLg;
 
   final MainAxisSize colMainAxisSize, rowMainAxisSize;
   final MainAxisAlignment colMainAxisAlignment, rowMainAxisAlignment;
@@ -13,7 +13,7 @@ class FlexRow extends StatelessWidget with Screen {
   /// Creates a row, which adapts according to screen size
   const FlexRow({
     Key? key,
-    this.colXS = 1,
+    this.colXs = 1,
     this.colSm = 1,
     this.colMd = 1,
     this.colLg = 1,
@@ -31,7 +31,7 @@ class FlexRow extends StatelessWidget with Screen {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
       int maxColumns = _getMaxColumns(context,
-          colXS: colXS, colSm: colSm, colMd: colMd, colLg: colLg);
+          colXs: colXs, colSm: colSm, colMd: colMd, colLg: colLg);
       List<Widget> columns = [];
       List<Widget> rows = [];
       for (Widget child in children) {
@@ -69,7 +69,7 @@ class FlexRow extends StatelessWidget with Screen {
 
   int _getMaxColumns(
     BuildContext context, {
-    int colXS = 1,
+    int colXs = 1,
     int colSm = 1,
     int colMd = 1,
     int colLg = 1,
@@ -82,7 +82,7 @@ class FlexRow extends StatelessWidget with Screen {
       case ScreenSize.sm:
         return colSm;
       default:
-        return colXS;
+        return colXs;
     }
   }
 }

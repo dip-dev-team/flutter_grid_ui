@@ -34,6 +34,9 @@ extension DeviceExtension on BuildContext {
   /// Get true if Desktop
   bool get isDesktop => Device.isDesktop;
 
+  /// Get true if isTablet
+  Future<bool> get isTablet => Device.isTablet(this);
+
   /// Get true if Mobile
   Future<bool> get isMobile => Device.isMobile(this);
 
@@ -58,6 +61,15 @@ extension DeviceExtension on BuildContext {
 // Device utils
 class Device {
   static bool get isDesktop => !isWeb && (isWindows || isLinux || isMacOS);
+
+  static Future<bool> isMobile(BuildContext context) async {
+    return await deviceType(context) == DeviceType.mobile;
+  }
+
+  static Future<bool> isTablet(BuildContext context) async {
+    return await deviceType(context) == DeviceType.tablet;
+  }
+
   static bool get isWeb => kIsWeb;
 
   static bool get isWindows => Platform.isWindows;
@@ -66,10 +78,6 @@ class Device {
   static bool get isAndroid => Platform.isAndroid;
   static bool get isFuchsia => Platform.isFuchsia;
   static bool get isIOS => Platform.isIOS;
-
-  static Future<bool> isMobile(BuildContext context) async {
-    return await deviceType(context) == DeviceType.mobile;
-  }
 
   /// Get @DeviceType
   /// @DeviceType.MOBILE

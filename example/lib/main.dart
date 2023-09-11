@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_flexui/flexui.dart';
+import 'package:flutter_flexui/flutter_flexui.dart';
 
 void main() => runApp(const MyApp());
 
@@ -82,7 +82,7 @@ class _MyHomePageState extends State<MyHomePage> {
               colLg: 6,
               colMd: 3,
               colSm: 2,
-              colXS: 1,
+              colXs: 1,
               colMainAxisAlignment: MainAxisAlignment.spaceEvenly,
               colVerticalDirection: VerticalDirection.down,
               colMainAxisSize: MainAxisSize.max,

@@ -9,13 +9,13 @@ To use this package, add `flutter_flexui` as a [dependency in your pubspec.yaml 
 
 ```yaml
 dependencies:
-  flutter_flexui: ^1.2.1
+  flutter_flexui: ^1.3.0
 ```
 
 ## Using
 
 ```dart
-import 'package:flutter_flexui/flexui.dart';
+import 'package:flutter_flexui/flutter_flexui.dart';
 ```
 
 ### Example
@@ -64,6 +64,15 @@ import 'package:flutter_flexui/flexui.dart';
   );
 ```
 
+#### FlexBuilder
+
+```dart
+  FlexBuilder(
+      builder: (context, screen) {
+        return Container();
+      },
+    );
+```
 ### Utils
 
 #### Screen
@@ -75,48 +84,34 @@ import 'package:flutter_flexui/flexui.dart';
   /// @ScreenSize.md (for small laptops - screens equal to or greater than 992px wide)
   /// @ScreenSize.lg (for laptops and desktops - screens equal to or greater than 1200px wide)
   context.screenSize;
-```
 
-```dart
   /// Get MediaQueryData
   context.mediaQuery;
-```
 
-```dart
-  context.screenSize;
-```
+  /// Get Orientation
+  context.orientation;
 
-```dart
+  /// Width of Screen
   context.screenWidth;
-```
 
-```dart
+  /// Height of Screen
   context.screenHeight;
-```
 
-```dart
   /// Get pixel ratio of screen
   context.pixelRatio;
-```
 
-```dart
   /// Screen diagonal
   context.diagonal;
-```
 
-```dart
+  /// Screen diagonal in inc
   context.diagonalInches;
-```
 
-```dart
+  /// Get height of status bar
   context.statusBarHeight;
-```
 
-```dart
+  /// Get height of bottom bar
   context.bottomBarHeight;
-```
 
-```dart
   // Get value by screen size
   context.valueByScreen(xsObject, smObject, mdObject, lgObject);
 ```
@@ -124,42 +119,26 @@ import 'package:flutter_flexui/flexui.dart';
 #### Device
 
 ```dart
-   context.isDesktop
-```
+  context.isDesktop
 
-```dart
+  context.isTablet
+
   context.isMobile
-```
 
-```dart
   context.isWeb
-```
 
-```dart
   context.isWindows
-```
 
-```dart
   context.isLinux
-```
 
-```dart
   context.isMacOS
-```
 
-```dart
   context.isAndroid
-```
 
-```dart
   context.isFuchsia
-```
 
-```dart
   context.isIOS
-```
 
-```dart
   /// Get @DeviceType
   context.deviceType
 ```
