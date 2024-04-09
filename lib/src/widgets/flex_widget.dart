@@ -9,8 +9,7 @@ class FlexWidget extends StatelessWidget with Screen {
   final Widget? lg;
 
   /// Displays a widget appropriate to the screen size
-  const FlexWidget({Key? key, this.xs, this.sm, this.md, this.lg})
-      : super(key: key);
+  const FlexWidget({super.key, this.xs, this.sm, this.md, this.lg});
 
   @override
   Widget build(BuildContext context) {

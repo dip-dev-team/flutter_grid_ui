@@ -12,7 +12,7 @@ class FlexRow extends StatelessWidget with Screen {
 
   /// Creates a row, which adapts according to screen size
   const FlexRow({
-    Key? key,
+    super.key,
     this.colXs = 1,
     this.colSm = 1,
     this.colMd = 1,
@@ -24,7 +24,7 @@ class FlexRow extends StatelessWidget with Screen {
     this.colVerticalDirection = VerticalDirection.down,
     this.rowVerticalDirection = VerticalDirection.down,
     this.children = const <Widget>[],
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {

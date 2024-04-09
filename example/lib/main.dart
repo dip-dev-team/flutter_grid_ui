@@ -4,7 +4,7 @@ import 'package:flutter_flexui/flutter_flexui.dart';
 void main() => runApp(const MyApp());
 
 class MyApp extends StatelessWidget {
-  const MyApp({Key? key}) : super(key: key);
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({super.key, required this.title});
   final String title;
 
   @override
@@ -75,6 +75,35 @@ class _MyHomePageState extends State<MyHomePage> {
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
+              child: Text("FlexWidget",
+                  style: Theme.of(context).textTheme.headlineMedium),
+            ),
+            Center(
+              child: FlexWidget(
+                xs: Container(
+                  color: Colors.green,
+                  width: 200.0,
+                  height: 200.0,
+                ),
+                sm: Container(
+                  color: Colors.orange,
+                  width: 200.0,
+                  height: 200.0,
+                ),
+                md: Container(
+                  color: Colors.red,
+                  width: 200.0,
+                  height: 200.0,
+                ),
+                lg: Container(
+                  color: Colors.purple,
+                  width: 200.0,
+                  height: 200.0,
+                ),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(8.0),
               child: Text("FlexRow",
                   style: Theme.of(context).textTheme.headlineMedium),
             ),
@@ -106,35 +135,6 @@ class _MyHomePageState extends State<MyHomePage> {
                     }),
               ],
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text("FlexWidget",
-                  style: Theme.of(context).textTheme.headlineMedium),
-            ),
-            Center(
-              child: FlexWidget(
-                xs: Container(
-                  color: Colors.green,
-                  width: 200.0,
-                  height: 200.0,
-                ),
-                sm: Container(
-                  color: Colors.orange,
-                  width: 200.0,
-                  height: 200.0,
-                ),
-                md: Container(
-                  color: Colors.red,
-                  width: 200.0,
-                  height: 200.0,
-                ),
-                lg: Container(
-                  color: Colors.purple,
-                  width: 200.0,
-                  height: 200.0,
-                ),
-              ),
-            )
           ],
         ),
       ),

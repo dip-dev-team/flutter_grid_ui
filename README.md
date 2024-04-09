@@ -1,5 +1,6 @@
-Flutter FlexUI
-===============
+# Flutter FlexUI
+
+=========================
 
 Flutter package for build Flexible UI for diference screens
 
@@ -9,7 +10,7 @@ To use this package, add `flutter_flexui` as a [dependency in your pubspec.yaml 
 
 ```yaml
 dependencies:
-  flutter_flexui: ^1.3.0
+  flutter_flexui: ^1.4.0
 ```
 
 ## Using
