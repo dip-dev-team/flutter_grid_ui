@@ -2,11 +2,16 @@
 
 [![Pub][pub_badge]][pub]
 
+Flutter package for build Flexible UI for diference screens
+
 [![BuyMeACoffee][buy_me_a_coffee_badge]][buy_me_a_coffee]
 
 ## Features
 
-Flutter package for build Flexible UI for diference screens
+- adaptive text size
+- widget replacement for different screen sizes
+- adaptive row (changing the number of columns)
+- device type detection, including TV
 
 ## Getting Started
 
@@ -24,6 +29,8 @@ import 'package:flutter_flexui/flutter_flexui.dart';
 ```
 
 ### Example
+
+For a longer example see at `/example` folder.
 
 #### FlexRow
 
