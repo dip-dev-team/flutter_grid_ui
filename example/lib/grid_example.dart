@@ -38,19 +38,19 @@ class _GridExampleState extends State<GridExample> {
                         _getGridItem(data, isDecorated: true, isEmpty: false),
                     emptyBuilder: (context, rowIndex, cellIndex) =>
                         DragTarget<int>(
-                      onAccept: (data) {
+                      onAcceptWithDetails: (data) {
                         setState(() {
                           if (rowIndex >= 0 && cellIndex < 0) {
                             _grid.putAt(
-                                rowIndex, [CellData(index: 0, data: data)],
+                                rowIndex, [CellData(index: 0, data: data.data)],
                                 cellOffset: true);
                           } else if (rowIndex < 0 && cellIndex >= 0) {
-                            _grid.putAt(
-                                0, [CellData(index: cellIndex, data: data)],
+                            _grid.putAt(0,
+                                [CellData(index: cellIndex, data: data.data)],
                                 offset: true);
                           } else {
                             _grid.putAt(rowIndex >= 0 ? rowIndex : 0,
-                                [CellData(index: cellIndex, data: data)]);
+                                [CellData(index: cellIndex, data: data.data)]);
                           }
                         });
                       },

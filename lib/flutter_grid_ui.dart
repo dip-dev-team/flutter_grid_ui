@@ -1,4 +1,4 @@
-library flutter_grid_ui;
+library;
 
 import 'package:dart_grid/dart_grid.dart';
 import 'package:flutter/material.dart';
